@@ -16,6 +16,8 @@ import Settings from './pages/Settings';
 import AdminDashboard from './pages/AdminDashboard';
 import MedicalRecords from './pages/MedicalRecords';
 import Telemedicine from './pages/Telemedicine';
+import MyConsultations from './pages/MyConsultations';
+import DoctorConsultations from './pages/DoctorConsultations';
 import __Layout from './Layout.jsx';
 
 
@@ -38,6 +40,8 @@ export const PAGES = {
     "AdminDashboard": AdminDashboard,
     "MedicalRecords": MedicalRecords,
     "Telemedicine": Telemedicine,
+    "MyConsultations": MyConsultations,
+    "DoctorConsultations": DoctorConsultations,
 }
 
 export const pagesConfig = {
