@@ -268,6 +268,23 @@ export default function ProfilePage() {
                         </CardContent>
                         </Card>
                         )}
+
+                        {/* Clinic Locations - shown on doctor's own profile */}
+                        {isDoctor && (
+                            <DoctorClinicLocations 
+                                doctor={user}
+                                isBengali={isBengali}
+                            />
+                        )}
+
+                        {/* Doctor Reviews - shown on doctor's profile */}
+                        {isDoctor && (
+                            <DoctorReviews 
+                                doctorId={user.id}
+                                isBengali={isBengali}
+                                currentUser={user}
+                            />
+                        )}
                         </div>
                         </div>
                         );
