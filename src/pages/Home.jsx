@@ -18,17 +18,349 @@ import {
   CheckCircle,
   Shield,
   Clock,
-  Users
+  Users,
+  Video,
+  FileText,
+  TrendingUp
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import AISymptomAssessment from "../components/ai/AISymptomAssessment";
+
+// Patient Dashboard Component
+function PatientDashboard({ user, isBengali, upcomingAppointments, onRefresh }) {
+  const nextAppointment = upcomingAppointments[0];
+  const [showAIDoctor, setShowAIDoctor] = useState(false);
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (isBengali) {
+      if (hour < 12) return "সুপ্রভাত";
+      if (hour < 17) return "শুভ দুপুর";
+      return "শুভ সন্ধ্যা";
+    } else {
+      if (hour < 12) return "Good Morning";
+      if (hour < 17) return "Good Afternoon";
+      return "Good Evening";
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
+      {/* Welcome Header */}
+      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl font-bold mb-2">
+            {getGreeting()}, {user.full_name}! 👋
+          </h1>
+          {nextAppointment ? (
+            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 mt-3">
+              <p className="text-sm mb-1">{isBengali ? 'পরবর্তী অ্যাপয়েন্টমেন্ট' : 'Next Appointment'}</p>
+              <p className="font-semibold">
+                {nextAppointment.doctor_name} • {new Date(nextAppointment.appointment_date).toLocaleString(isBengali ? 'bn-BD' : 'en-US')}
+              </p>
+            </div>
+          ) : (
+            <p className="text-emerald-100">{isBengali ? 'আজ কোনো অ্যাপয়েন্টমেন্ট নেই' : 'No appointments today'}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+        {/* Quick Actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle>{isBengali ? '⚡ দ্রুত অ্যাক্সেস' : '⚡ Quick Actions'}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Button onClick={() => setShowAIDoctor(true)} variant="outline" className="h-24 flex flex-col gap-2">
+                <Stethoscope className="w-6 h-6" />
+                <span className="text-sm">{isBengali ? 'AI ডাক্তার' : 'AI Doctor'}</span>
+              </Button>
+              <Link to={createPageUrl('Doctors')}>
+                <Button variant="outline" className="h-24 w-full flex flex-col gap-2">
+                  <Users className="w-6 h-6" />
+                  <span className="text-sm">{isBengali ? 'ডাক্তার খুঁজুন' : 'Find Doctor'}</span>
+                </Button>
+              </Link>
+              <Link to={createPageUrl('Emergency')}>
+                <Button variant="outline" className="h-24 w-full flex flex-col gap-2 border-red-200 hover:bg-red-50">
+                  <PhoneCall className="w-6 h-6 text-red-600" />
+                  <span className="text-sm">{isBengali ? 'জরুরি সেবা' : 'Emergency'}</span>
+                </Button>
+              </Link>
+              <Link to={createPageUrl('MedicalRecords')}>
+                <Button variant="outline" className="h-24 w-full flex flex-col gap-2">
+                  <FileText className="w-6 h-6" />
+                  <span className="text-sm">{isBengali ? 'মেডিকেল রেকর্ড' : 'Records'}</span>
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Upcoming Appointments */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>{isBengali ? '📅 আসন্ন অ্যাপয়েন্টমেন্ট' : '📅 Upcoming Appointments'}</CardTitle>
+              <Link to={createPageUrl('Appointments')}>
+                <Button variant="ghost" size="sm">{isBengali ? 'সব দেখুন' : 'View All'}</Button>
+              </Link>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {upcomingAppointments.length > 0 ? (
+              <div className="space-y-3">
+                {upcomingAppointments.slice(0, 3).map((apt) => (
+                  <div key={apt.id} className="p-4 border rounded-lg hover:shadow-md transition-all">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="font-semibold">{apt.doctor_name}</h4>
+                        <p className="text-sm text-gray-600">{new Date(apt.appointment_date).toLocaleString()}</p>
+                        <p className="text-xs text-gray-500 mt-1">{apt.reason}</p>
+                      </div>
+                      <Link to={createPageUrl('Appointments')}>
+                        <Button size="sm">{isBengali ? 'বিস্তারিত' : 'Details'}</Button>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8">
+                <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <p className="text-gray-500 mb-4">{isBengali ? 'কোনো অ্যাপয়েন্টমেন্ট নেই' : 'No upcoming appointments'}</p>
+                <Link to={createPageUrl('Doctors')}>
+                  <Button>{isBengali ? 'ডাক্তার বুক করুন' : 'Book a Doctor'}</Button>
+                </Link>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Dialog open={showAIDoctor} onOpenChange={setShowAIDoctor}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <AISymptomAssessment isBengali={isBengali} user={user} />
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}
+
+// Doctor Dashboard Component
+function DoctorDashboard({ user, isBengali }) {
+  const [todayAppointments, setTodayAppointments] = useState([]);
+  const [consultations, setConsultations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadDoctorData();
+  }, []);
+
+  const loadDoctorData = async () => {
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const [appointments, videoConsultations] = await Promise.all([
+        base44.entities.Appointment.filter({ doctor_id: user.id, status: 'scheduled' }, 'appointment_date', 20).catch(() => []),
+        base44.entities.VideoConsultation.filter({ doctor_id: user.id, session_status: 'scheduled' }, '-scheduled_time', 10).catch(() => [])
+      ]);
+      
+      const todayApts = appointments.filter(apt => apt.appointment_date.startsWith(today));
+      setTodayAppointments(todayApts);
+      setConsultations(videoConsultations);
+    } catch (error) {
+      console.error('Failed to load:', error);
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
+      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl font-bold mb-2">
+            {isBengali ? 'স্বাগতম,' : 'Welcome,'} Dr. {user.full_name} 👨‍⚕️
+          </h1>
+          <p className="text-blue-100">
+            {isBengali ? `আজ ${todayAppointments.length}টি অ্যাপয়েন্টমেন্ট` : `${todayAppointments.length} appointments today`}
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>{isBengali ? "📅 আজকের সময়সূচী" : "📅 Today's Schedule"}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {todayAppointments.length > 0 ? (
+                <div className="space-y-3">
+                  {todayAppointments.map((apt) => (
+                    <div key={apt.id} className="p-3 border rounded-lg">
+                      <p className="font-semibold">{apt.patient_name}</p>
+                      <p className="text-sm text-gray-600">{new Date(apt.appointment_date).toLocaleTimeString()}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 text-center py-4">{isBengali ? 'আজ কোনো অ্যাপয়েন্টমেন্ট নেই' : 'No appointments today'}</p>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>{isBengali ? "📞 টেলিমেডিসিন কল" : "📞 Telemedicine Calls"}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {consultations.length > 0 ? (
+                <div className="space-y-3">
+                  {consultations.slice(0, 5).map((consult) => (
+                    <div key={consult.id} className="p-3 border rounded-lg flex items-center justify-between">
+                      <div>
+                        <p className="font-semibold">{consult.patient_id}</p>
+                        <p className="text-sm text-gray-600">{new Date(consult.scheduled_time).toLocaleString()}</p>
+                      </div>
+                      <Link to={createPageUrl(`Telemedicine?consultationId=${consult.id}`)}>
+                        <Button size="sm"><Video className="w-4 h-4 mr-2" /> {isBengali ? 'যোগদান' : 'Join'}</Button>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 text-center py-4">{isBengali ? 'কোনো পেন্ডিং কল নেই' : 'No pending calls'}</p>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link to={createPageUrl('DoctorConsultations')}>
+            <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+              <Calendar className="w-6 h-6" />
+              <span className="text-sm">{isBengali ? 'পরামর্শ' : 'Consultations'}</span>
+            </Button>
+          </Link>
+          <Link to={createPageUrl('Profile')}>
+            <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+              <Users className="w-6 h-6" />
+              <span className="text-sm">{isBengali ? 'প্রোফাইল' : 'Profile'}</span>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Admin Dashboard Component
+function AdminDashboard({ user, isBengali }) {
+  const [metrics, setMetrics] = useState({ appointments: 0, emergencies: 0, hospitals: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    loadAdminMetrics();
+  }, []);
+
+  const loadAdminMetrics = async () => {
+    try {
+      const today = new Date().toISOString().split('T')[0];
+      const [appointments, emergencies, hospitals] = await Promise.all([
+        base44.entities.Appointment.list('-created_date', 1000).catch(() => []),
+        base44.entities.EmergencyRequest.filter({ status: 'pending' }, '-created_date', 100).catch(() => []),
+        base44.entities.Hospital.list('-created_date', 10000).catch(() => [])
+      ]);
+
+      setMetrics({
+        appointments: appointments.filter(a => a.appointment_date.startsWith(today)).length,
+        emergencies: emergencies.length,
+        hospitals: hospitals.length
+      });
+    } catch (error) {
+      console.error('Failed to load:', error);
+    }
+    setIsLoading(false);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50">
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-2xl font-bold mb-2">
+            {isBengali ? 'এডমিন ড্যাশবোর্ড' : 'Admin Dashboard'}
+          </h1>
+          <p className="text-purple-100">{isBengali ? 'সিস্টেম ওভারভিউ' : 'System Overview'}</p>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">{isBengali ? 'আজকের অ্যাপয়েন্টমেন্ট' : 'Today\'s Appointments'}</p>
+                  <p className="text-3xl font-bold">{metrics.appointments}</p>
+                </div>
+                <Calendar className="w-12 h-12 text-blue-500" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">{isBengali ? 'জরুরি অনুরোধ' : 'Emergency Requests'}</p>
+                  <p className="text-3xl font-bold text-red-600">{metrics.emergencies}</p>
+                </div>
+                <PhoneCall className="w-12 h-12 text-red-500" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">{isBengali ? 'হাসপাতাল' : 'Hospitals'}</p>
+                  <p className="text-3xl font-bold">{metrics.hospitals}</p>
+                </div>
+                <MapPin className="w-12 h-12 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Link to={createPageUrl('AdminDashboard')}>
+            <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+              <Shield className="w-6 h-6" />
+              <span className="text-sm">{isBengali ? 'ম্যানেজমেন্ট' : 'Management'}</span>
+            </Button>
+          </Link>
+          <Link to={createPageUrl('Analytics')}>
+            <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
+              <TrendingUp className="w-6 h-6" />
+              <span className="text-sm">{isBengali ? 'অ্যানালিটিক্স' : 'Analytics'}</span>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function HomePage() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isBengali, setIsBengali] = useState(true);
   const [showAIDoctor, setShowAIDoctor] = useState(false);
+  const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [stats, setStats] = useState({
     hospitals: 5816,
     doctors: 2500,
@@ -46,6 +378,16 @@ export default function HomePage() {
       if (currentUser) {
         setUser(currentUser);
         setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
+        
+        // Load user-specific data
+        if (currentUser.user_type === 'patient' || !currentUser.user_type) {
+          const appointments = await base44.entities.Appointment.filter(
+            { patient_id: currentUser.id, status: 'scheduled' },
+            'appointment_date',
+            5
+          ).catch(() => []);
+          setUpcomingAppointments(appointments.filter(apt => new Date(apt.appointment_date) > new Date()));
+        }
       }
 
       // Load real stats
@@ -166,6 +508,18 @@ export default function HomePage() {
     );
   }
 
+  // Route to appropriate dashboard based on user role
+  if (user) {
+    if (user.role === 'admin') {
+      return <AdminDashboard user={user} isBengali={isBengali} />;
+    }
+    if (user.user_type === 'doctor' || user.role === 'doctor') {
+      return <DoctorDashboard user={user} isBengali={isBengali} />;
+    }
+    return <PatientDashboard user={user} isBengali={isBengali} upcomingAppointments={upcomingAppointments} onRefresh={loadData} />;
+  }
+
+  // Public landing page for non-authenticated users
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
       {/* Hero Section */}

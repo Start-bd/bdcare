@@ -10,6 +10,7 @@ import DrugInteractionChecker from './pages/DrugInteractionChecker';
 import Emergency from './pages/Emergency';
 import Forum from './pages/Forum';
 import HealthRiskAssessment from './pages/HealthRiskAssessment';
+import Home from './pages/Home';
 import Hospitals from './pages/Hospitals';
 import MedicalRecords from './pages/MedicalRecords';
 import MedicineChecker from './pages/MedicineChecker';
@@ -18,7 +19,6 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import SkinChecker from './pages/SkinChecker';
 import Telemedicine from './pages/Telemedicine';
-import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -35,6 +35,7 @@ export const PAGES = {
     "Emergency": Emergency,
     "Forum": Forum,
     "HealthRiskAssessment": HealthRiskAssessment,
+    "Home": Home,
     "Hospitals": Hospitals,
     "MedicalRecords": MedicalRecords,
     "MedicineChecker": MedicineChecker,
@@ -43,7 +44,6 @@ export const PAGES = {
     "Settings": Settings,
     "SkinChecker": SkinChecker,
     "Telemedicine": Telemedicine,
-    "Home": Home,
 }
 
 export const pagesConfig = {
