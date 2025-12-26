@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 
 export default function WelcomeSection({ user, isBengali }) {
+    const [showAIDoctor, setShowAIDoctor] = useState(false);
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (isBengali) {
