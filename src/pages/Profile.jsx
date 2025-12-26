@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { User as UserIcon, LogIn, Shield, Edit, Save, Loader2, X, WifiOff, Stethoscope } from 'lucide-react';
 import DoctorProfileEditor from '../components/doctor/DoctorProfileEditor';
+import DoctorReviews from '../components/doctor/DoctorReviews';
+import DoctorClinicLocations from '../components/doctor/DoctorClinicLocations';
 
 export default function ProfilePage() {
     const [user, setUser] = useState(null);
