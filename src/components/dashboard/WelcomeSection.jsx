@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Heart, Sparkles, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import AISymptomAssessment from '../ai/AISymptomAssessment';
 
 export default function WelcomeSection({ user, isBengali }) {
     const [showAIDoctor, setShowAIDoctor] = useState(false);
@@ -89,12 +91,14 @@ export default function WelcomeSection({ user, isBengali }) {
                   </Button>
                 </Link>
                 
-                <Link to={createPageUrl("Dashboard")}>
-                  <Button size="lg" className="w-full sm:w-auto bg-white/20 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/30 shadow-xl hover:scale-105 transition-all">
-                    <Sparkles className="w-5 h-5 mr-2" />
-                    🤖 {isBengali ? "AI ডাক্তারের সাথে কথা বলুন" : "Talk to AI Doctor"}
-                  </Button>
-                </Link>
+                <Button 
+                  size="lg" 
+                  onClick={() => setShowAIDoctor(true)}
+                  className="w-full sm:w-auto bg-white/20 backdrop-blur-md border-2 border-white/40 text-white hover:bg-white/30 shadow-xl hover:scale-105 transition-all"
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  🤖 {isBengali ? "AI ডাক্তারের সাথে কথা বলুন" : "Talk to AI Doctor"}
+                </Button>
               </div>
             </div>
 
@@ -124,6 +128,12 @@ export default function WelcomeSection({ user, isBengali }) {
           </div>
         </div>
       </div>
+
+      <Dialog open={showAIDoctor} onOpenChange={setShowAIDoctor}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <AISymptomAssessment isBengali={isBengali} user={user} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
