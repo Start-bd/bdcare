@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { User } from '@/entities/User';
 import { AIConsultation as AIConsultationEntity } from '@/entities/AIConsultation';
@@ -239,7 +238,22 @@ ${assessment.whenToSeeDoctor}
                                         <div key={index} className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                                             {msg.role === 'assistant' && <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0"><Bot className="w-5 h-5 text-white" /></div>}
                                             <div className={`max-w-2xl p-4 rounded-lg ${msg.role === 'user' ? 'bg-blue-500 text-white rounded-br-none' : 'bg-white text-gray-800 rounded-bl-none shadow-sm'}`}>
-                                                <ReactMarkdown className="prose prose-sm max-w-none">{msg.content}</ReactMarkdown>
+                                                <ReactMarkdown 
+                                                    components={{
+                                                        p: ({children}) => <p className="mb-2 last:mb-0">{children}</p>,
+                                                        ul: ({children}) => <ul className="list-disc ml-4 mb-2">{children}</ul>,
+                                                        ol: ({children}) => <ol className="list-decimal ml-4 mb-2">{children}</ol>,
+                                                        li: ({children}) => <li className="mb-1">{children}</li>,
+                                                        h1: ({children}) => <h1 className="text-xl font-bold mb-2">{children}</h1>,
+                                                        h2: ({children}) => <h2 className="text-lg font-bold mb-2">{children}</h2>,
+                                                        h3: ({children}) => <h3 className="text-base font-bold mb-1">{children}</h3>,
+                                                        strong: ({children}) => <strong className="font-bold">{children}</strong>,
+                                                        em: ({children}) => <em className="italic">{children}</em>,
+                                                        code: ({children}) => <code className="bg-gray-100 px-1 rounded">{children}</code>,
+                                                    }}
+                                                >
+                                                    {msg.content}
+                                                </ReactMarkdown>
                                             </div>
                                             {msg.role === 'user' && <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0"><UserIcon className="w-5 h-5 text-white" /></div>}
                                         </div>
