@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { User } from "@/entities/User";
-import { 
-  Heart, 
-  MapPin, 
-  MessageSquare, 
-  PhoneCall, 
-  Droplets, 
+import {
+  Heart,
+  MapPin,
+  MessageSquare,
+  PhoneCall,
+  Droplets,
   User as UserIcon,
   Globe,
   Shield,
@@ -17,8 +17,8 @@ import {
   Pill,
   ClipboardCheck,
   Settings as SettingsIcon,
-  TrendingUp
-} from "lucide-react";
+  TrendingUp } from
+"lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -31,97 +31,97 @@ import {
   SidebarHeader,
   SidebarFooter,
   SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+  SidebarTrigger } from
+"@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import OfflineIndicator from "../components/OfflineIndicator";
 
 const navigationItems = [
-  {
-    title: "স্বাস্থ্য সহায়ক",
-    titleEn: "Health Agent",
-    url: createPageUrl("Dashboard"),
-    icon: Heart,
-    color: "text-emerald-600",
-  },
-  {
-    title: "হাসপাতাল",
-    titleEn: "Hospitals", 
-    url: createPageUrl("Hospitals"),
-    icon: MapPin,
-    color: "text-blue-600",
-  },
-  {
-    title: "ডাক্তার",
-    titleEn: "Doctors",
-    url: createPageUrl("Doctors"),
-    icon: Stethoscope,
-    color: "text-cyan-600",
-  },
-  {
-    title: "ঔষধ চেকার",
-    titleEn: "Medicine Checker",
-    url: createPageUrl("MedicineChecker"),
-    icon: Pill,
-    color: "text-green-600",
-  },
-  {
-    title: "চর্ম পরীক্ষক",
-    titleEn: "Skin Checker",
-    url: createPageUrl("SkinChecker"),
-    icon: Activity,
-    color: "text-pink-600",
-  },
-  {
-    title: "জরুরি সেবা",
-    titleEn: "Emergency",
-    url: createPageUrl("Emergency"),
-    icon: PhoneCall,
-    color: "text-red-600",
-  },
-  {
-    title: "রক্তের ব্যাংক",
-    titleEn: "Blood Bank",
-    url: createPageUrl("BloodBank"),
-    icon: Droplets,
-    color: "text-red-500",
-  },
-  {
-    title: "স্বাস্থ্য ফোরাম",
-    titleEn: "Health Forum",
-    url: createPageUrl("Forum"),
-    icon: MessageSquare,
-    color: "text-purple-600",
-  },
-];
+{
+  title: "স্বাস্থ্য সহায়ক",
+  titleEn: "Health Agent",
+  url: createPageUrl("Dashboard"),
+  icon: Heart,
+  color: "text-emerald-600"
+},
+{
+  title: "হাসপাতাল",
+  titleEn: "Hospitals",
+  url: createPageUrl("Hospitals"),
+  icon: MapPin,
+  color: "text-blue-600"
+},
+{
+  title: "ডাক্তার",
+  titleEn: "Doctors",
+  url: createPageUrl("Doctors"),
+  icon: Stethoscope,
+  color: "text-cyan-600"
+},
+{
+  title: "ঔষধ চেকার",
+  titleEn: "Medicine Checker",
+  url: createPageUrl("MedicineChecker"),
+  icon: Pill,
+  color: "text-green-600"
+},
+{
+  title: "চর্ম পরীক্ষক",
+  titleEn: "Skin Checker",
+  url: createPageUrl("SkinChecker"),
+  icon: Activity,
+  color: "text-pink-600"
+},
+{
+  title: "জরুরি সেবা",
+  titleEn: "Emergency",
+  url: createPageUrl("Emergency"),
+  icon: PhoneCall,
+  color: "text-red-600"
+},
+{
+  title: "রক্তের ব্যাংক",
+  titleEn: "Blood Bank",
+  url: createPageUrl("BloodBank"),
+  icon: Droplets,
+  color: "text-red-500"
+},
+{
+  title: "স্বাস্থ্য ফোরাম",
+  titleEn: "Health Forum",
+  url: createPageUrl("Forum"),
+  icon: MessageSquare,
+  color: "text-purple-600"
+}];
+
 
 const aiTools = [
-    {
-        title: "ড্রাগ চেকার",
-        titleEn: "Drug Checker",
-        url: createPageUrl("DrugInteractionChecker"),
-        icon: Pill,
-        color: "text-green-600",
-    },
-    {
-        title: "ঝুঁকি মূল্যায়ন",
-        titleEn: "Risk Assessment",
-        url: createPageUrl("HealthRiskAssessment"),
-        icon: ClipboardCheck,
-        color: "text-orange-600",
-    }
-];
+{
+  title: "ড্রাগ চেকার",
+  titleEn: "Drug Checker",
+  url: createPageUrl("DrugInteractionChecker"),
+  icon: Pill,
+  color: "text-green-600"
+},
+{
+  title: "ঝুঁকি মূল্যায়ন",
+  titleEn: "Risk Assessment",
+  url: createPageUrl("HealthRiskAssessment"),
+  icon: ClipboardCheck,
+  color: "text-orange-600"
+}];
+
 
 const insightsTools = [
-    {
-        title: "হেলথ অ্যানালিটিক্স",
-        titleEn: "Health Analytics",
-        url: createPageUrl("Analytics"),
-        icon: TrendingUp,
-        color: "text-indigo-600",
-    }
-];
+{
+  title: "হেলথ অ্যানালিটিক্স",
+  titleEn: "Health Analytics",
+  url: createPageUrl("Analytics"),
+  icon: TrendingUp,
+  color: "text-indigo-600"
+}];
+
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
@@ -153,7 +153,7 @@ export default function Layout({ children, currentPageName }) {
 
     loadUser();
     loadRealTimeStats();
-    
+
     // Update stats every 30 seconds
     const interval = setInterval(loadRealTimeStats, 30000);
     return () => clearInterval(interval);
@@ -175,9 +175,9 @@ export default function Layout({ children, currentPageName }) {
       setUser(currentUser);
       setIsBengali(currentUser.preferred_language === 'bengali' || currentUser.preferred_language === 'both');
     } catch (error) {
+
       // User not logged in or error occurred
-    }
-    setIsLoading(false);
+    }setIsLoading(false);
   };
 
   const loadRealTimeStats = async () => {
@@ -186,16 +186,16 @@ export default function Layout({ children, currentPageName }) {
       // For now, we'll simulate with some variation
       const baseStats = { hospitals: 5816, bloodDonors: 23786, districts: 64 };
       const variation = Math.floor(Math.random() * 20) - 10; // -10 to +10 variation
-      
+
       setRealTimeStats({
         hospitals: baseStats.hospitals + variation,
         bloodDonors: baseStats.bloodDonors + Math.floor(Math.random() * 100),
         districts: baseStats.districts
       });
     } catch (error) {
+
       // Keep existing stats on error
-    }
-  };
+    }};
 
   const toggleLanguage = () => {
     setIsBengali(!isBengali);
@@ -249,10 +249,10 @@ export default function Layout({ children, currentPageName }) {
     };
 
     const currentPage = pageTitles[currentPageName] || pageTitles.Dashboard;
-    
+
     // Update document title and meta tags
     document.title = isBengali ? currentPage.titleBn : currentPage.titleEn;
-    
+
     // Update or create meta description
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -303,8 +303,8 @@ export default function Layout({ children, currentPageName }) {
           <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-emerald-700 font-medium">স্বাস্থ্য এজেন্ট লোড হচ্ছে...</p>
         </div>
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -329,7 +329,7 @@ export default function Layout({ children, currentPageName }) {
             <SidebarHeader className="border-b border-emerald-100 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-12 w-12 rounded-xl bangladesh-gradient cultural-pattern flex items-center justify-center shadow-lg">
-                  <Heart className="h-6 w-6 text-white" />
+                  <Heart className="text-slate-500 lucide lucide-heart h-6 w-6" />
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-emerald-800">
@@ -341,8 +341,8 @@ export default function Layout({ children, currentPageName }) {
                 </div>
               </div>
 
-              {user && (
-                <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-3 border border-emerald-200">
+              {user &&
+              <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-3 border border-emerald-200">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="h-8 w-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-semibold">
                       {user.full_name?.charAt(0).toUpperCase() || 'U'}
@@ -352,27 +352,27 @@ export default function Layout({ children, currentPageName }) {
                       <p className="text-xs text-gray-600 truncate">{user.email}</p>
                     </div>
                   </div>
-                  {user.role === 'doctor' && (
-                    <Badge className="bg-blue-100 text-blue-800 text-xs">
+                  {user.role === 'doctor' &&
+                <Badge className="bg-blue-100 text-blue-800 text-xs">
                       {isBengali ? "চিকিৎসক" : "Doctor"}
                     </Badge>
-                  )}
-                  {user.role === 'admin' && (
-                    <Badge className="bg-purple-100 text-purple-800 text-xs">
+                }
+                  {user.role === 'admin' &&
+                <Badge className="bg-purple-100 text-purple-800 text-xs">
                       {isBengali ? "এডমিন" : "Admin"}
                     </Badge>
-                  )}
+                }
                 </div>
-              )}
+              }
 
-              {!user && (
-                <Button
-                  onClick={() => navigate(createPageUrl("Profile"))}
-                  className="w-full bangladesh-gradient text-white hover:opacity-90"
-                >
+              {!user &&
+              <Button
+                onClick={() => navigate(createPageUrl("Profile"))}
+                className="w-full bangladesh-gradient text-white hover:opacity-90">
+
                   {isBengali ? "লগইন করুন" : "Login"}
                 </Button>
-              )}
+              }
             </SidebarHeader>
             
             <SidebarContent className="p-3">
@@ -382,13 +382,13 @@ export default function Layout({ children, currentPageName }) {
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {navigationItems.map((item) => (
-                      <SidebarMenuItem key={item.url}>
-                        <SidebarMenuButton 
-                          asChild
-                          isActive={location.pathname === item.url}
-                          className="hover:bg-emerald-50 hover:text-emerald-700 transition-all"
-                        >
+                    {navigationItems.map((item) =>
+                    <SidebarMenuItem key={item.url}>
+                        <SidebarMenuButton
+                        asChild
+                        isActive={location.pathname === item.url}
+                        className="hover:bg-emerald-50 hover:text-emerald-700 transition-all">
+
                           <Link to={item.url} className="flex items-center gap-3 px-3 py-2">
                             <item.icon className={`h-5 w-5 ${item.color}`} />
                             <span className="font-medium">
@@ -397,7 +397,7 @@ export default function Layout({ children, currentPageName }) {
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                    ))}
+                    )}
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
@@ -408,13 +408,13 @@ export default function Layout({ children, currentPageName }) {
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {aiTools.map((item) => (
-                      <SidebarMenuItem key={item.url}>
-                        <SidebarMenuButton 
-                          asChild
-                          isActive={location.pathname === item.url}
-                          className="hover:bg-purple-50 hover:text-purple-700 transition-all"
-                        >
+                    {aiTools.map((item) =>
+                    <SidebarMenuItem key={item.url}>
+                        <SidebarMenuButton
+                        asChild
+                        isActive={location.pathname === item.url}
+                        className="hover:bg-purple-50 hover:text-purple-700 transition-all">
+
                           <Link to={item.url} className="flex items-center gap-3 px-3 py-2">
                             <item.icon className={`h-5 w-5 ${item.color}`} />
                             <span className="font-medium">
@@ -423,7 +423,7 @@ export default function Layout({ children, currentPageName }) {
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                    ))}
+                    )}
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
@@ -434,13 +434,13 @@ export default function Layout({ children, currentPageName }) {
                 </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {insightsTools.map((item) => (
-                      <SidebarMenuItem key={item.url}>
-                        <SidebarMenuButton 
-                          asChild
-                          isActive={location.pathname === item.url}
-                          className="hover:bg-indigo-50 hover:text-indigo-700 transition-all"
-                        >
+                    {insightsTools.map((item) =>
+                    <SidebarMenuItem key={item.url}>
+                        <SidebarMenuButton
+                        asChild
+                        isActive={location.pathname === item.url}
+                        className="hover:bg-indigo-50 hover:text-indigo-700 transition-all">
+
                           <Link to={item.url} className="flex items-center gap-3 px-3 py-2">
                             <item.icon className={`h-5 w-5 ${item.color}`} />
                             <span className="font-medium">
@@ -449,13 +449,13 @@ export default function Layout({ children, currentPageName }) {
                           </Link>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
-                    ))}
+                    )}
                   </SidebarMenu>
                 </SidebarGroupContent>
               </SidebarGroup>
 
-              {user && (
-                <SidebarGroup>
+              {user &&
+              <SidebarGroup>
                   <SidebarGroupLabel className="text-xs font-semibold text-gray-500 uppercase px-3 mt-2">
                     {isBengali ? "একাউন্ট" : "Account"}
                   </SidebarGroupLabel>
@@ -488,7 +488,7 @@ export default function Layout({ children, currentPageName }) {
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </SidebarGroup>
-              )}
+              }
             </SidebarContent>
 
             <SidebarFooter className="border-t border-emerald-100 p-4 bg-gradient-to-r from-emerald-50 to-green-50">
@@ -497,8 +497,8 @@ export default function Layout({ children, currentPageName }) {
                   variant="outline"
                   size="sm"
                   onClick={toggleLanguage}
-                  className="w-full justify-start gap-2 border-emerald-200 hover:bg-emerald-50"
-                >
+                  className="w-full justify-start gap-2 border-emerald-200 hover:bg-emerald-50">
+
                   <Globe className="h-4 w-4" />
                   <span className="text-sm">
                     {isBengali ? "English" : "বাংলা"}
@@ -549,8 +549,8 @@ export default function Layout({ children, currentPageName }) {
                   variant="ghost"
                   size="icon"
                   onClick={toggleLanguage}
-                  className="text-emerald-700"
-                >
+                  className="text-emerald-700">
+
                   <Globe className="h-5 w-5" />
                 </Button>
               </div>
@@ -563,6 +563,6 @@ export default function Layout({ children, currentPageName }) {
           </main>
         </div>
       </SidebarProvider>
-    </div>
-  );
+    </div>);
+
 }
