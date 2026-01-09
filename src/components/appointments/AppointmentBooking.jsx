@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import { base44 } from '@/api/base44Client';
 import { User } from '@/entities/User';
 import { Appointment } from '@/entities/Appointment';
 import { UserPreferences } from '@/entities/UserPreferences';
@@ -138,8 +138,17 @@ export default function AppointmentBooking({ doctorId, user, isBengali, onBookin
                 doctor_name: doctor.full_name,
                 appointment_date: selectedSlot.toISOString(),
                 reason: bookingReason,
-                status: 'scheduled',
-                meeting_link: `https://meet.example.com/session/${Date.now()}` // Simulated meeting link
+                status: 'scheduled'
+            });
+
+            // Auto-create video consultation for this appointment
+            await base44.entities.VideoConsultation.create({
+                patient_id: user.id,
+                doctor_id: doctor.id,
+                appointment_id: newAppointment.id,
+                consultation_type: 'routine',
+                scheduled_time: selectedSlot.toISOString(),
+                session_status: 'scheduled'
             });
             
             setBookingStatus({ success: true, message: isBengali ? 'অ্যাপয়েন্টমেন্ট সফলভাবে বুক করা হয়েছে!' : 'Appointment booked successfully!' });

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Video, Mic, MicOff, VideoOff, Phone, MessageSquare, Loader2 } from 'lucide-react';
+import { Video, MessageSquare, Loader2, Clock } from 'lucide-react';
 import ConsultationChat from '../components/telemedicine/ConsultationChat';
+import WebRTCVideo from '../components/telemedicine/WebRTCVideo';
+import PostCallSummary from '../components/telemedicine/PostCallSummary';
 
 export default function TelemedicinePage() {
     const location = useLocation();
+    const navigate = useNavigate();
     const params = new URLSearchParams(location.search);
     const consultationId = params.get('consultationId');
     
@@ -16,10 +20,9 @@ export default function TelemedicinePage() {
     const [consultation, setConsultation] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isBengali, setIsBengali] = useState(true);
-    const [videoEnabled, setVideoEnabled] = useState(true);
-    const [audioEnabled, setAudioEnabled] = useState(true);
     const [callActive, setCallActive] = useState(false);
-    const [showChat, setShowChat] = useState(false);
+    const [showChat, setShowChat] = useState(true);
+    const [showSummary, setShowSummary] = useState(false);
 
     useEffect(() => {
         loadData();
@@ -67,7 +70,12 @@ export default function TelemedicinePage() {
             session_status: 'completed',
             actual_end_time: new Date().toISOString()
         });
-        loadData();
+        await loadData();
+        setShowSummary(true);
+    };
+
+    const handleSummaryComplete = () => {
+        navigate(createPageUrl('Appointments'));
     };
 
     if (isLoading) {
