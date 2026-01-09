@@ -96,7 +96,7 @@ function DoctorCard({ doctor, isBengali }) {
                     {/* Action Buttons */}
                     <div className="flex gap-2 mt-4">
                         <Button asChild variant="outline" className="flex-1 hover:bg-blue-50 hover:border-blue-200">
-                            <Link to={createPageUrl(`Profile?userId=${doctor.id}`)}>
+                            <Link to={createPageUrl(`DoctorProfile?doctorId=${doctor.id}`)}>
                                 <UserIcon className="w-4 h-4 mr-2" />
                                 {isBengali ? 'প্রোফাইল দেখুন' : 'View Profile'}
                             </Link>

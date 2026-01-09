@@ -19,6 +19,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import SkinChecker from './pages/SkinChecker';
 import Telemedicine from './pages/Telemedicine';
+import DoctorProfile from './pages/DoctorProfile';
 import __Layout from './Layout.jsx';
 
 
@@ -44,6 +45,7 @@ export const PAGES = {
     "Settings": Settings,
     "SkinChecker": SkinChecker,
     "Telemedicine": Telemedicine,
+    "DoctorProfile": DoctorProfile,
 }
 
 export const pagesConfig = {

@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Save, FileText, Calendar, Download } from 'lucide-react';
+import ReviewPrompt from './ReviewPrompt';
 
 export default function PostCallSummary({ consultation, user, isBengali, onComplete }) {
     const [notes, setNotes] = useState(consultation.consultation_notes || '');
@@ -14,8 +15,10 @@ export default function PostCallSummary({ consultation, user, isBengali, onCompl
     const [followUpRequired, setFollowUpRequired] = useState(consultation.follow_up_required || false);
     const [isSaving, setIsSaving] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [showReviewPrompt, setShowReviewPrompt] = useState(true);
 
     const isDoctor = user.user_type === 'doctor' || user.role === 'doctor';
+    const isPatient = !isDoctor;
 
     const handleSave = async () => {
         setIsSaving(true);
@@ -79,8 +82,20 @@ ${isBengali ? 'ফলো-আপ প্রয়োজন' : 'Follow-up Required'
     }
 
     return (
-        <Card className="max-w-4xl mx-auto shadow-xl">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white">
+        <div className="space-y-6">
+            {/* Review Prompt for Patients */}
+            {isPatient && showReviewPrompt && (
+                <ReviewPrompt 
+                    consultation={consultation}
+                    user={user}
+                    isBengali={isBengali}
+                    onComplete={onComplete}
+                    onSkip={() => setShowReviewPrompt(false)}
+                />
+            )}
+
+            <Card className="max-w-4xl mx-auto shadow-xl">
+                <CardHeader className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white">
                 <CardTitle className="text-2xl flex items-center gap-2">
                     <FileText className="w-6 h-6" />
                     {isBengali ? 'পরামর্শ সারাংশ' : 'Consultation Summary'}
@@ -220,5 +235,6 @@ ${isBengali ? 'ফলো-আপ প্রয়োজন' : 'Follow-up Required'
                 </div>
             </CardContent>
         </Card>
+        </div>
     );
 }
