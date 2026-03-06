@@ -129,6 +129,19 @@ export default function TelemedicinePage() {
         ? consultation.patient_id 
         : consultation.doctor_id;
 
+    if (showSummary) {
+        return (
+            <div className="min-h-screen bg-gray-50 p-4">
+                <PostCallSummary
+                    consultation={consultation}
+                    user={user}
+                    isBengali={isBengali}
+                    onComplete={handleSummaryComplete}
+                />
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-4">
             <div className="max-w-7xl mx-auto">
