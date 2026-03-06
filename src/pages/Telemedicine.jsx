@@ -152,35 +152,33 @@ export default function TelemedicinePage() {
                             <CardContent className="p-0">
                                 <div className="relative aspect-video bg-gray-900 rounded-lg overflow-hidden">
                                     {callActive ? (
-                                        <div className="w-full h-full flex items-center justify-center">
-                                            <div className="text-center">
-                                                <Video className="w-16 h-16 text-emerald-500 mx-auto mb-4 animate-pulse" />
-                                                <p className="text-white text-lg">
-                                                    {isBengali ? 'ভিডিও কল চলছে...' : 'Video call in progress...'}
-                                                </p>
-                                                <p className="text-gray-400 text-sm mt-2">
-                                                    {isBengali 
-                                                        ? 'WebRTC ইন্টিগ্রেশন এখানে ইমপ্লিমেন্ট করুন'
-                                                        : 'Implement WebRTC integration here'}
-                                                </p>
-                                            </div>
-                                        </div>
+                                       <div className="w-full h-full flex items-center justify-center bg-gray-900">
+                                           <div className="text-center">
+                                               <div className="w-24 h-24 rounded-full bg-emerald-600 flex items-center justify-center mx-auto mb-4 animate-pulse">
+                                                   <Video className="w-12 h-12 text-white" />
+                                               </div>
+                                               <p className="text-white text-lg font-medium">
+                                                   {isBengali ? 'কল চলছে...' : 'Call in progress...'}
+                                               </p>
+                                               <p className="text-gray-400 text-sm mt-1">{otherPartyName}</p>
+                                           </div>
+                                       </div>
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center">
-                                            <div className="text-center">
-                                                <VideoOff className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                                                <p className="text-white text-lg mb-4">
-                                                    {isBengali ? 'কল শুরু করতে প্রস্তুত' : 'Ready to start call'}
-                                                </p>
-                                                <Button 
-                                                    onClick={startCall}
-                                                    className="bg-emerald-600 hover:bg-emerald-700"
-                                                >
-                                                    <Video className="w-4 h-4 mr-2" />
-                                                    {isBengali ? 'কল শুরু করুন' : 'Start Call'}
-                                                </Button>
-                                            </div>
-                                        </div>
+                                       <div className="w-full h-full flex items-center justify-center bg-gray-900">
+                                           <div className="text-center">
+                                               <VideoOff className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                                               <p className="text-white text-lg mb-4">
+                                                   {isBengali ? 'কল শুরু করতে প্রস্তুত' : 'Ready to start call'}
+                                               </p>
+                                               <Button 
+                                                   onClick={startCall}
+                                                   className="bg-emerald-600 hover:bg-emerald-700"
+                                               >
+                                                   <Video className="w-4 h-4 mr-2" />
+                                                   {isBengali ? 'কল শুরু করুন' : 'Start Call'}
+                                               </Button>
+                                           </div>
+                                       </div>
                                     )}
 
                                     {/* Controls */}
