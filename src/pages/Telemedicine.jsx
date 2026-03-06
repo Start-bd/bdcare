@@ -23,6 +23,8 @@ export default function TelemedicinePage() {
     const [callActive, setCallActive] = useState(false);
     const [showChat, setShowChat] = useState(true);
     const [showSummary, setShowSummary] = useState(false);
+    const [videoEnabled, setVideoEnabled] = useState(true);
+    const [audioEnabled, setAudioEnabled] = useState(true);
 
     useEffect(() => {
         loadData();
