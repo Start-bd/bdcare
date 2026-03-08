@@ -393,5 +393,6 @@ export default function DoctorsPage() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
