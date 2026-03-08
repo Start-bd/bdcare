@@ -58,6 +58,20 @@ export default function DoctorProfilePage() {
         setIsLoading(false);
     };
 
+    // SEO-friendly values
+    const seoTitle   = doctor
+        ? `Dr. ${doctor.full_name} – ${specs?.[0] || 'Physician'} | BDCare`
+        : 'Doctor Profile | BDCare';
+    const seoTitleBn = doctor
+        ? `ডাক্তার ${doctor.full_name} – ${specs?.[0] || 'চিকিৎসক'} | BDCare`
+        : 'ডাক্তারের প্রোফাইল | BDCare';
+    const seoDesc    = doctor
+        ? `${doctor.full_name} is a ${specs?.[0] || 'physician'} in Bangladesh with ${doctor.years_experience || 0} years of experience. Book an appointment on BDCare.`
+        : 'Find and book doctors in Bangladesh on BDCare.';
+    const seoDescBn  = doctor
+        ? `${doctor.full_name} বাংলাদেশের একজন ${specs?.[0] || 'চিকিৎসক'}, ${doctor.years_experience || 0} বছরের অভিজ্ঞতা সম্পন্ন। BDCare-এ অ্যাপয়েন্টমেন্ট নিন।`
+        : 'BDCare-এ বাংলাদেশের সেরা ডাক্তারদের খুঁজুন।';
+
     if (isLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
