@@ -241,8 +241,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "Find blood banks and donors across Bangladesh. Real-time blood inventory and immediate assistance."
       },
       Doctors: {
-        titleBn: "ডাক্তার খুঁজুন - বিশেষজ্ঞ চিকিৎসক | স্বাস্থ্য বন্ধু",
-        titleEn: "Find Doctors - Specialist Physicians | Shasthya Bondhu",
+        titleBn: "ডাক্তার খুঁজুন - বিশেষজ্ঞ চিকিৎসক | BD Care",
+        titleEn: "Find Doctors - Specialist Physicians | BD Care",
         descBn: "বাংলাদেশের সেরা ডাক্তারদের খুঁজুন। অনলাইন অ্যাপয়েন্টমেন্ট, ভিডিও পরামর্শ এবং বিশেষজ্ঞ চিকিৎসা।",
         descEn: "Find the best doctors in Bangladesh. Online appointments, video consultations, and specialist care."
       },
