@@ -255,13 +255,15 @@ export default function TelemedicinePage() {
                     </div>
 
                     {/* Chat/Info Panel */}
-                    <div className="lg:col-span-1">
-                        {showChat || !callActive ? (
-                            <ConsultationChat 
-                                consultation={consultation}
-                                user={user}
-                                isBengali={isBengali}
-                            />
+                     <div className="lg:col-span-1">
+                         {showChat || !callActive ? (
+                             <Suspense fallback={<div className="h-64 bg-gray-800 rounded-xl animate-pulse" />}>
+                             <ConsultationChat 
+                                 consultation={consultation}
+                                 user={user}
+                                 isBengali={isBengali}
+                             />
+                             </Suspense>
                         ) : (
                             <Card className="bg-gray-800 border-gray-700">
                                 <CardHeader>
