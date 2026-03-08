@@ -102,6 +102,17 @@ export default function DoctorProfilePage() {
         : (doctor.doctor_specialization ? [doctor.doctor_specialization] : []);
 
     return (
+        <>
+        <SEOHead
+            title={seoTitle}
+            titleBn={seoTitleBn}
+            description={seoDesc}
+            descriptionBn={seoDescBn}
+            lang={isBengali ? 'bn' : 'en'}
+            doctor={doctor}
+            averageRating={averageRating}
+            reviewCount={reviews.length}
+        />
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 p-4 md:p-8">
             <div className="max-w-6xl mx-auto space-y-6">
                 {/* Header Card */}
@@ -112,10 +123,10 @@ export default function DoctorProfilePage() {
                                 <Stethoscope className="w-16 h-16 text-white" />
                             </div>
                             <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2">
+                                <div className="flex items-center gap-2 mb-2 flex-wrap">
                                     <h1 className="text-3xl md:text-4xl font-bold">{doctor.full_name}</h1>
                                     {doctor.verification_status === 'verified' && (
-                                        <Shield className="w-6 h-6 text-white" title={isBengali ? 'যাচাইকৃত ডাক্তার' : 'Verified Doctor'} />
+                                        <BmdcBadge lang={isBengali ? 'bn' : 'en'} size="md" />
                                     )}
                                 </div>
                                 {specs.length > 0 && (
