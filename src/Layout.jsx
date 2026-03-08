@@ -247,8 +247,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "Find the best doctors in Bangladesh. Online appointments, video consultations, and specialist care."
       },
       MedicineChecker: {
-        titleBn: "ঔষধ চেকার - ঔষধ যাচাই করুন | স্বাস্থ্য বন্ধু",
-        titleEn: "Medicine Checker - Verify Medicines | Shasthya Bondhu",
+        titleBn: "ঔষধ চেকার - ঔষধ যাচাই করুন | BD Care",
+        titleEn: "Medicine Checker - Verify Medicines | BD Care",
         descBn: "AI দিয়ে ঔষধ যাচাই করুন। ছবি আপলোড করে ঔষধের তথ্য, ডোজ এবং পার্শ্ব প্রতিক্রিয়া জানুন।",
         descEn: "Verify medicines with AI. Upload image to get medicine information, dosage, and side effects."
       },
