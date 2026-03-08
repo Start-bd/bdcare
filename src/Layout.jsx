@@ -229,8 +229,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "Find 5000+ hospitals across Bangladesh. Search government, private, and specialized hospitals, view ratings, and contact directly."
       },
       Emergency: {
-        titleBn: "জরুরি সেবা ২৪/৭ - তাৎক্ষণিক সাহায্য | স্বাস্থ্য বন্ধু",
-        titleEn: "Emergency Services 24/7 - Immediate Help | Shasthya Bondhu",
+        titleBn: "জরুরি সেবা ২৪/৭ - তাৎক্ষণিক সাহায্য | BD Care",
+        titleEn: "Emergency Services 24/7 - Immediate Help | BD Care",
         descBn: "২৪ ঘণ্টা জরুরি স্বাস্থ্যসেবা। অ্যাম্বুলেন্স, জরুরি হটলাইন, লাইভ ডাক্তার পরামর্শ এবং রিয়েল-টাইম ট্র্যাকিং।",
         descEn: "24/7 emergency healthcare services. Ambulance, emergency hotlines, live doctor consultation, and real-time tracking."
       },
