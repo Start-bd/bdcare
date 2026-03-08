@@ -253,8 +253,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "Verify medicines with AI. Upload image to get medicine information, dosage, and side effects."
       },
       Forum: {
-        titleBn: "স্বাস্থ্য ফোরাম - প্রশ্ন করুন | স্বাস্থ্য বন্ধু",
-        titleEn: "Health Forum - Ask Questions | Shasthya Bondhu",
+        titleBn: "স্বাস্থ্য ফোরাম - প্রশ্ন করুন | BD Care",
+        titleEn: "Health Forum - Ask Questions | BD Care",
         descBn: "স্বাস্থ্য সম্পর্কিত প্রশ্ন করুন এবং ডাক্তারদের থেকে উত্তর পান। কমিউনিটির সাথে অভিজ্ঞতা শেয়ার করুন।",
         descEn: "Ask health questions and get answers from doctors. Share experiences with the community."
       }
