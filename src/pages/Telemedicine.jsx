@@ -132,12 +132,14 @@ export default function TelemedicinePage() {
     if (showSummary) {
         return (
             <div className="min-h-screen bg-gray-50 p-4">
-                <PostCallSummary
-                    consultation={consultation}
-                    user={user}
-                    isBengali={isBengali}
-                    onComplete={handleSummaryComplete}
-                />
+                <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><Loader2 className="w-8 h-8 animate-spin text-emerald-600" /></div>}>
+                    <PostCallSummary
+                        consultation={consultation}
+                        user={user}
+                        isBengali={isBengali}
+                        onComplete={handleSummaryComplete}
+                    />
+                </Suspense>
             </div>
         );
     }
