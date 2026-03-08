@@ -209,3 +209,11 @@ function AdminDashboardContent() {
         </div>
     );
 }
+
+export default function AdminDashboard() {
+    return (
+        <RouteGuard allowedRoles={['admin']} redirectTo="/">
+            <AdminDashboardContent />
+        </RouteGuard>
+    );
+}
