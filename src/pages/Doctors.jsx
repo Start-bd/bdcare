@@ -278,7 +278,7 @@ export default function DoctorsPage() {
                     <p className="text-lg text-gray-600">{isBengali ? 'আপনার প্রয়োজন অনুযায়ী সেরা ডাক্তারদের সাথে পরামর্শ করুন।' : 'Consult with the best doctors for your needs.'}</p>
                     <div className="flex items-center justify-center gap-4 mt-4 text-sm text-gray-500">
                         <div className="flex items-center gap-1">
-                            <Shield className="w-4 h-4 text-blue-500" />
+                            <BmdcBadge showLabel={false} lang={isBengali ? 'bn' : 'en'} size="sm" />
                             <span>{filteredDoctors.filter(d => d.verification_status === 'verified').length} {isBengali ? 'যাচাইকৃত ডাক্তার' : 'Verified Doctors'}</span>
                         </div>
                         <div className="flex items-center gap-1">
