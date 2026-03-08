@@ -8,10 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader2, Video, Calendar, User as UserIcon, FileText, Clock, Pill, Edit } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import PrescriptionEditor from '../components/telemedicine/PrescriptionEditor';
-import PrescriptionViewer from '../components/telemedicine/PrescriptionViewer';
+const PrescriptionEditor = lazy(() => import('../components/telemedicine/PrescriptionEditor'));
+const PrescriptionViewer = lazy(() => import('../components/telemedicine/PrescriptionViewer'));
 
-export default function DoctorConsultationsPage() {
+function DoctorConsultationsContent() {
     const [user, setUser] = useState(null);
     const [consultations, setConsultations] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
