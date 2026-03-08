@@ -11,7 +11,7 @@ import { Loader2, ShieldCheck, UserCheck, UserX, Trash2, Users } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import DoctorVerification from '../components/admin/DoctorVerification';
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
     const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -20,22 +20,18 @@ export default function AdminDashboard() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const checkAdmin = async () => {
+        const init = async () => {
             try {
                 const user = await User.me();
                 setCurrentUser(user);
                 setIsBengali(user.preferred_language === 'bengali' || !user.preferred_language);
-                if (user.role !== 'admin') {
-                    navigate('/'); // Redirect non-admins
-                    return;
-                }
                 fetchUsers();
             } catch (e) {
-                navigate('/'); // Redirect if not logged in
+                // RouteGuard handles redirect
             }
         };
-        checkAdmin();
-    }, [navigate]);
+        init();
+    }, []);
 
     const fetchUsers = async () => {
         setIsLoading(true);
