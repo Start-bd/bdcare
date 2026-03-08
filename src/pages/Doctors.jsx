@@ -6,9 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, User as UserIcon, Stethoscope, Search, CalendarPlus, WifiOff, Star, Shield, MapPin, Clock } from 'lucide-react';
+import { Loader2, User as UserIcon, Stethoscope, Search, CalendarPlus, WifiOff, Star, MapPin, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import SEOHead from '../components/seo/SEOHead';
+import BmdcBadge from '../components/ui/BmdcBadge';
 
 function DoctorCard({ doctor, isBengali }) {
     const yearsExp = doctor.years_experience || 0;
