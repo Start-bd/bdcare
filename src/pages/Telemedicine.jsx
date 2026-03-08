@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
@@ -6,9 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Video, VideoOff, Mic, MicOff, Phone, MessageSquare, Loader2, Clock, Info } from 'lucide-react';
-import ConsultationChat from '../components/telemedicine/ConsultationChat';
-import WebRTCVideo from '../components/telemedicine/WebRTCVideo';
-import PostCallSummary from '../components/telemedicine/PostCallSummary';
+
+const ConsultationChat = lazy(() => import('../components/telemedicine/ConsultationChat'));
+const PostCallSummary  = lazy(() => import('../components/telemedicine/PostCallSummary'));
 
 export default function TelemedicinePage() {
     const location = useLocation();
