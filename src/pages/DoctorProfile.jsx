@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Star, Shield, MapPin, Clock, Calendar, Award, GraduationCap, Languages, Stethoscope, Phone, Video } from 'lucide-react';
-import DoctorReviews from '../components/doctor/DoctorReviews';
-import DoctorClinicLocations from '../components/doctor/DoctorClinicLocations';
+import { Loader2, Star, MapPin, Calendar, Award, GraduationCap, Languages, Stethoscope } from 'lucide-react';
+import SEOHead from '../components/seo/SEOHead';
+import BmdcBadge from '../components/ui/BmdcBadge';
+
+const DoctorReviews         = lazy(() => import('../components/doctor/DoctorReviews'));
+const DoctorClinicLocations = lazy(() => import('../components/doctor/DoctorClinicLocations'));
 
 export default function DoctorProfilePage() {
     const location = useLocation();
