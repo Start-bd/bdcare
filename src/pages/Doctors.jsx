@@ -27,12 +27,12 @@ function DoctorCard({ doctor, isBengali }) {
                         <UserIcon className="w-8 h-8 text-blue-600" />
                     </div>
                     <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
                             <CardTitle className="text-xl font-bold text-gray-900 truncate">
                                 {doctor.full_name}
                             </CardTitle>
                             {doctor.verification_status === 'verified' && (
-                                <Shield className="w-5 h-5 text-blue-500" title={isBengali ? 'যাচাইকৃত ডাক্তার' : 'Verified Doctor'} />
+                                <BmdcBadge showLabel={false} lang={isBengali ? 'bn' : 'en'} size="sm" />
                             )}
                         </div>
                         {specs.length > 0 && (
