@@ -223,8 +223,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "Bangladesh's first AI-powered healthcare platform. Get free health consultations, find hospitals, connect with doctors, and access emergency services 24/7."
       },
       Hospitals: {
-        titleBn: "হাসপাতাল খুঁজুন - ৫০০০+ হাসপাতাল | স্বাস্থ্য বন্ধু",
-        titleEn: "Find Hospitals - 5000+ Hospitals in Bangladesh | Shasthya Bondhu",
+        titleBn: "হাসপাতাল খুঁজুন - ৫০০০+ হাসপাতাল | BD Care",
+        titleEn: "Find Hospitals - 5000+ Hospitals in Bangladesh | BD Care",
         descBn: "বাংলাদেশের সব জেলায় ৫০০০+ হাসপাতালের তথ্য। সরকারি, বেসরকারি এবং বিশেষায়িত হাসপাতাল খুঁজুন, রিভিউ দেখুন এবং সরাসরি যোগাযোগ করুন।",
         descEn: "Find 5000+ hospitals across Bangladesh. Search government, private, and specialized hospitals, view ratings, and contact directly."
       },
