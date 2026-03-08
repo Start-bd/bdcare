@@ -41,11 +41,22 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
-      <WelcomeSection user={user} isBengali={isBengali} />
-      <PersonalizedHealthInsights user={user} isBengali={isBengali} />
-      <QuickActions isBengali={isBengali} />
-      <HealthStats isBengali={isBengali} />
-    </div>
+    <>
+      <SEOHead
+        title="BDCare – AI Healthcare Platform Bangladesh | স্বাস্থ্য বন্ধু"
+        titleBn="BDCare – AI স্বাস্থ্যসেবা প্ল্যাটফর্ম বাংলাদেশ | স্বাস্থ্য বন্ধু"
+        description="Bangladesh's #1 telemedicine platform. Find doctors, book appointments, emergency care, blood bank, AI health assistant — all in one place."
+        descriptionBn="বাংলাদেশের ১ নম্বর টেলিমেডিসিন প্ল্যাটফর্ম। ডাক্তার খুঁজুন, অ্যাপয়েন্টমেন্ট নিন, জরুরি সেবা, ব্লাড ব্যাংক, AI স্বাস্থ্য সহায়ক — সব এক জায়গায়।"
+        lang={isBengali ? 'bn' : 'en'}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50">
+        <WelcomeSection user={user} isBengali={isBengali} />
+        <Suspense fallback={<div className="h-48 mx-8 rounded-xl bg-white/50 animate-pulse my-4" />}>
+          <PersonalizedHealthInsights user={user} isBengali={isBengali} />
+        </Suspense>
+        <QuickActions isBengali={isBengali} />
+        <HealthStats isBengali={isBengali} />
+      </div>
+    </>
   );
 }
