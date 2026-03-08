@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { User } from "@/entities/User";
+import SEOHead from "../components/seo/SEOHead";
 import WelcomeSection from "../components/dashboard/WelcomeSection";
 import QuickActions from "../components/dashboard/QuickActions";
 import HealthStats from "../components/dashboard/HealthStats";
-import PersonalizedHealthInsights from "../components/dashboard/PersonalizedHealthInsights";
+
+const PersonalizedHealthInsights = lazy(() => import("../components/dashboard/PersonalizedHealthInsights"));
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
