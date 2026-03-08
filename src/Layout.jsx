@@ -235,8 +235,8 @@ export default function Layout({ children, currentPageName }) {
         descEn: "24/7 emergency healthcare services. Ambulance, emergency hotlines, live doctor consultation, and real-time tracking."
       },
       BloodBank: {
-        titleBn: "ব্লাড ব্যাংক - রক্তের প্রয়োজন? | স্বাস্থ্য বন্ধু",
-        titleEn: "Blood Bank - Need Blood? | Shasthya Bondhu",
+        titleBn: "ব্লাড ব্যাংক - রক্তের প্রয়োজন? | BD Care",
+        titleEn: "Blood Bank - Need Blood? | BD Care",
         descBn: "সারা বাংলাদেশে ব্লাড ব্যাংক এবং রক্তদাতা খুঁজুন। রিয়েল-টাইম রক্তের মজুদ তথ্য এবং তাৎক্ষণিক সহায়তা।",
         descEn: "Find blood banks and donors across Bangladesh. Real-time blood inventory and immediate assistance."
       },
