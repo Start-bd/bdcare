@@ -254,16 +254,21 @@ export default function DoctorProfilePage() {
                 </div>
 
                 {/* Clinic Locations */}
-                <DoctorClinicLocations doctor={doctor} isBengali={isBengali} />
+                <Suspense fallback={<div className="h-32 bg-white rounded-xl animate-pulse" />}>
+                    <DoctorClinicLocations doctor={doctor} isBengali={isBengali} />
+                </Suspense>
 
                 {/* Reviews Section */}
-                <DoctorReviews 
-                    doctorId={doctor.id}
-                    isBengali={isBengali}
-                    currentUser={currentUser}
-                    onReviewAdded={loadData}
-                />
+                <Suspense fallback={<div className="h-48 bg-white rounded-xl animate-pulse" />}>
+                    <DoctorReviews 
+                        doctorId={doctor.id}
+                        isBengali={isBengali}
+                        currentUser={currentUser}
+                        onReviewAdded={loadData}
+                    />
+                </Suspense>
             </div>
         </div>
+        </>
     );
 }
