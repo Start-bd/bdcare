@@ -62,7 +62,7 @@ export default function WelcomeSection({ user, isBengali }) {
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
                 <Sparkles className="w-5 h-5 text-yellow-300 animate-pulse" />
                 <span className="text-white font-semibold text-sm tracking-wide">
-                  {isBengali ? "বাংলাদেশের প্রথম স্মার্ট হেলথ প্ল্যাটফর্ম" : "Bangladesh's First Smart Health Platform"}
+                  {isBengali ? "BD Care – বাংলাদেশের স্মার্ট হেলথ প্ল্যাটফর্ম" : "BD Care – Bangladesh's Smart Health Platform"}
                 </span>
               </div>
             </div>

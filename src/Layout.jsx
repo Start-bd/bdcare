@@ -345,10 +345,10 @@ export default function Layout({ children, currentPageName }) {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-emerald-800">
-                    {isBengali ? "স্বাস্থ্য বন্ধু" : "Shasthya Bondhu"}
+                    {isBengali ? "BD Care" : "BD Care"}
                   </h1>
                   <p className="text-xs text-emerald-600">
-                    {isBengali ? "AI স্বাস্থ্য সহায়ক" : "AI Health Assistant"}
+                    {isBengali ? "স্বাস্থ্য বন্ধু | AI সহায়ক" : "Shasthya Bondhu | AI Assistant"}
                   </p>
                 </div>
               </div>
@@ -553,7 +553,7 @@ export default function Layout({ children, currentPageName }) {
                   </div>
                   <div>
                     <h1 className="text-lg font-bold text-emerald-800">
-                      {isBengali ? "স্বাস্থ্য বন্ধু" : "Shasthya Bondhu"}
+                      BD Care
                     </h1>
                   </div>
                 </div>

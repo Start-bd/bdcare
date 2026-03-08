@@ -87,10 +87,10 @@ export default function DoctorProfilePage() {
         ? doctor.doctor_specializations 
         : (doctor.doctor_specialization ? [doctor.doctor_specialization] : []);
 
-    const seoTitle   = `Dr. ${doctor.full_name} – ${specs[0] || 'Physician'} | BDCare`;
-    const seoTitleBn = `ডাক্তার ${doctor.full_name} – ${specs[0] || 'চিকিৎসক'} | BDCare`;
-    const seoDesc    = `${doctor.full_name} is a ${specs[0] || 'physician'} in Bangladesh with ${doctor.years_experience || 0} years of experience. Book an appointment on BDCare.`;
-    const seoDescBn  = `${doctor.full_name} বাংলাদেশের একজন ${specs[0] || 'চিকিৎসক'}, ${doctor.years_experience || 0} বছরের অভিজ্ঞতা সম্পন্ন। BDCare-এ অ্যাপয়েন্টমেন্ট নিন।`;
+    const seoTitle   = `Dr. ${doctor.full_name} – ${specs[0] || 'Physician'} | BD Care`;
+    const seoTitleBn = `ডাক্তার ${doctor.full_name} – ${specs[0] || 'চিকিৎসক'} | BD Care`;
+    const seoDesc    = `${doctor.full_name} is a ${specs[0] || 'physician'} in Bangladesh with ${doctor.years_experience || 0} years of experience. Book an appointment on BD Care.`;
+    const seoDescBn  = `${doctor.full_name} বাংলাদেশের একজন ${specs[0] || 'চিকিৎসক'}, ${doctor.years_experience || 0} বছরের অভিজ্ঞতা সম্পন্ন। BD Care-এ অ্যাপয়েন্টমেন্ট নিন।`;
 
     return (
         <>

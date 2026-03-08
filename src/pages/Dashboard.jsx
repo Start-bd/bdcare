@@ -43,8 +43,8 @@ export default function Dashboard() {
   return (
     <>
       <SEOHead
-        title="BDCare – AI Healthcare Platform Bangladesh | স্বাস্থ্য বন্ধু"
-        titleBn="BDCare – AI স্বাস্থ্যসেবা প্ল্যাটফর্ম বাংলাদেশ | স্বাস্থ্য বন্ধু"
+        title="BD Care – AI Healthcare Platform Bangladesh | স্বাস্থ্য বন্ধু"
+        titleBn="BD Care – AI স্বাস্থ্যসেবা প্ল্যাটফর্ম বাংলাদেশ | স্বাস্থ্য বন্ধু"
         description="Bangladesh's #1 telemedicine platform. Find doctors, book appointments, emergency care, blood bank, AI health assistant — all in one place."
         descriptionBn="বাংলাদেশের ১ নম্বর টেলিমেডিসিন প্ল্যাটফর্ম। ডাক্তার খুঁজুন, অ্যাপয়েন্টমেন্ট নিন, জরুরি সেবা, ব্লাড ব্যাংক, AI স্বাস্থ্য সহায়ক — সব এক জায়গায়।"
         lang={isBengali ? 'bn' : 'en'}
