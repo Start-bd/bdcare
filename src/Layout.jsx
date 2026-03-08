@@ -135,6 +135,18 @@ export default function Layout({ children, currentPageName }) {
     districts: 64
   });
 
+  // ── PWA Service Worker registration ──────────────────────────────────
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+    }
+  }, []);
+
+  // ── html lang attribute ───────────────────────────────────────────────
+  useEffect(() => {
+    document.documentElement.lang = isBengali ? 'bn' : 'en';
+  }, [isBengali]);
+
   useEffect(() => {
     // Inject Google Analytics
     const script1 = document.createElement('script');
