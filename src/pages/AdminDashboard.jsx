@@ -7,8 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Loader2, ShieldCheck, UserCheck, UserX, Trash2, Users } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Loader2, ShieldCheck, UserX, Users } from 'lucide-react';
 import DoctorVerification from '../components/admin/DoctorVerification';
 
 function AdminDashboardContent() {
@@ -17,7 +16,6 @@ function AdminDashboardContent() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isBengali, setIsBengali] = useState(false);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const init = async () => {
