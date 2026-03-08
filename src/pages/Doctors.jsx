@@ -268,6 +268,14 @@ export default function DoctorsPage() {
     }
 
     return (
+        <>
+        <SEOHead
+            title="Find Specialist Doctors in Bangladesh | BDCare"
+            titleBn="বাংলাদেশে বিশেষজ্ঞ ডাক্তার খুঁজুন | BDCare"
+            description="Search from hundreds of verified BMDC doctors in Bangladesh. Book telemedicine appointments online, 24/7."
+            descriptionBn="বাংলাদেশের শত শত BMDC যাচাইকৃত ডাক্তারদের মধ্যে খুঁজুন। অনলাইনে টেলিমেডিসিন অ্যাপয়েন্টমেন্ট বুক করুন।"
+            lang={isBengali ? 'bn' : 'en'}
+        />
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 p-4 md:p-8">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-8">
