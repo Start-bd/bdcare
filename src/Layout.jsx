@@ -217,8 +217,8 @@ export default function Layout({ children, currentPageName }) {
   const getPageMetadata = () => {
     const pageTitles = {
       Dashboard: {
-        titleBn: "ড্যাশবোর্ড - স্বাস্থ্য বন্ধু | AI চালিত স্বাস্থ্যসেবা প্ল্যাটফর্ম",
-        titleEn: "Dashboard - Shasthya Bondhu | AI-Powered Healthcare Platform Bangladesh",
+        titleBn: "ড্যাশবোর্ড - BD Care | AI চালিত স্বাস্থ্যসেবা প্ল্যাটফর্ম",
+        titleEn: "Dashboard - BD Care | AI-Powered Healthcare Platform Bangladesh",
         descBn: "বাংলাদেশের প্রথম AI চালিত স্বাস্থ্যসেবা প্ল্যাটফর্ম। বিনামূল্যে স্বাস্থ্য পরামর্শ, হাসপাতাল খুঁজুন, ডাক্তারদের সাথে সংযুক্ত হন এবং জরুরি সেবা পান।",
         descEn: "Bangladesh's first AI-powered healthcare platform. Get free health consultations, find hospitals, connect with doctors, and access emergency services 24/7."
       },
