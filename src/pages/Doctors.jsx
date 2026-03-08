@@ -356,8 +356,8 @@ export default function DoctorsPage() {
                         <span className="font-semibold">{filteredDoctors.length}</span> {isBengali ? 'জন ডাক্তার পাওয়া গেছে' : 'doctors found'}
                     </p>
                     {filteredDoctors.filter(d => d.verification_status === 'verified').length > 0 && (
-                        <div className="flex items-center gap-1 text-sm text-blue-600">
-                            <Shield className="w-4 h-4" />
+                        <div className="flex items-center gap-1 text-sm text-emerald-600">
+                            <BmdcBadge showLabel={false} size="sm" lang={isBengali ? 'bn' : 'en'} />
                             {isBengali ? 'যাচাইকৃত ডাক্তাররা প্রথমে দেখানো হয়েছে' : 'Verified doctors shown first'}
                         </div>
                     )}
