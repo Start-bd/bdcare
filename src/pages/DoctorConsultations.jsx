@@ -252,24 +252,33 @@ function DoctorConsultationsContent() {
                 </Tabs>
             </div>
 
-            {editingConsultation && (
-                <PrescriptionEditor
-                    consultation={editingConsultation}
-                    isBengali={isBengali}
-                    onClose={() => {
-                        setEditingConsultation(null);
-                        loadData();
-                    }}
-                />
-            )}
-
-            {viewingConsultation && (
-                <PrescriptionViewer
-                    consultation={viewingConsultation}
-                    isBengali={isBengali}
-                    onClose={() => setViewingConsultation(null)}
-                />
-            )}
+            <Suspense fallback={null}>
+                {editingConsultation && (
+                    <PrescriptionEditor
+                        consultation={editingConsultation}
+                        isBengali={isBengali}
+                        onClose={() => {
+                            setEditingConsultation(null);
+                            loadData();
+                        }}
+                    />
+                )}
+                {viewingConsultation && (
+                    <PrescriptionViewer
+                        consultation={viewingConsultation}
+                        isBengali={isBengali}
+                        onClose={() => setViewingConsultation(null)}
+                    />
+                )}
+            </Suspense>
         </div>
+    );
+}
+
+export default function DoctorConsultationsPage() {
+    return (
+        <RouteGuard allowedRoles={['doctor', 'admin']} redirectTo="/">
+            <DoctorConsultationsContent />
+        </RouteGuard>
     );
 }
