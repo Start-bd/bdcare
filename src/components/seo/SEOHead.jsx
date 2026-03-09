@@ -25,7 +25,7 @@ export default function SEOHead({
         document.documentElement.lang = lang === 'bn' ? 'bn' : 'en';
 
         // ── <title> ──
-        document.title = resolvedTitle || 'BDCare – স্বাস্থ্য বন্ধু';
+        document.title = resolvedTitle || 'BD Care – AI Healthcare Platform Bangladesh';
 
         const setMeta = (name, content, attr = 'name') => {
             let el = document.querySelector(`meta[${attr}="${name}"]`);

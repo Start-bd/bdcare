@@ -40,7 +40,7 @@ export default function HealthStats({ isBengali }) {
         EmergencyRequest.list('-created_date', 1000)
       ]);
 
-      const doctorCount = users.filter(u => u.user_type === 'doctor').length;
+      const doctorCount = users.filter(u => u.user_type === 'doctor' || u.role === 'doctor').length;
       const totalBloodDonors = bloodBanks.reduce((sum, bank) => {
         const inventory = bank.blood_inventory || {};
         return sum + Object.values(inventory).reduce((a, b) => a + (b || 0), 0);
