@@ -537,13 +537,13 @@ export default function HomePage() {
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
                 {isBengali ? (
                   <>
-                    স্বাস্থ্য বন্ধু
+                    BD Care
                     <br />
                     <span className="text-yellow-300">আপনার ডিজিটাল হেলথকেয়ার</span>
                   </>
                 ) : (
                   <>
-                    Shasthya Bondhu
+                    BD Care
                     <br />
                     <span className="text-yellow-300">Your Digital Healthcare</span>
                   </>
@@ -660,7 +660,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              {isBengali ? '✨ কেন স্বাস্থ্য বন্ধু?' : '✨ Why Shasthya Bondhu?'}
+              {isBengali ? '✨ কেন BD Care?' : '✨ Why BD Care?'}
             </h2>
             <p className="text-gray-600 text-lg">
               {isBengali ? 'বাংলাদেশের সবচেয়ে বিশ্বস্ত হেলথকেয়ার প্ল্যাটফর্ম' : "Bangladesh's Most Trusted Healthcare Platform"}
