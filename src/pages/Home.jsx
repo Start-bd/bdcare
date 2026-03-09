@@ -23,7 +23,7 @@ import {
   FileText,
   TrendingUp
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import AISymptomAssessment from "../components/ai/AISymptomAssessment";
 
@@ -366,8 +366,6 @@ export default function HomePage() {
     doctors: 2500,
     bloodDonors: 23786
   });
-  const navigate = useNavigate();
-
   useEffect(() => {
     loadData();
   }, []);
