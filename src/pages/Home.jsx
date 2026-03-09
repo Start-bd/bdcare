@@ -718,8 +718,8 @@ export default function HomePage() {
           </h2>
           <p className="text-white/90 text-lg mb-8">
             {isBengali 
-              ? 'হাজারো মানুষ ইতিমধ্যে স্বাস্থ্য বন্ধু ব্যবহার করছেন। আপনিও যুক্ত হন!'
-              : 'Thousands are already using Shasthya Bondhu. Join them today!'}
+              ? 'হাজারো মানুষ ইতিমধ্যে BD Care ব্যবহার করছেন। আপনিও যুক্ত হন!'
+              : 'Thousands are already using BD Care. Join them today!'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {!user ? (
