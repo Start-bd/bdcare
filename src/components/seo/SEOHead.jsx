@@ -57,7 +57,7 @@ export default function SEOHead({
         setMeta('og:description', resolvedDesc,  'property');
         setMeta('og:type',        doctor ? 'profile' : 'website', 'property');
         setMeta('og:url',         canonical,     'property');
-        setMeta('og:site_name',   'BDCare',      'property');
+        setMeta('og:site_name',   'BD Care',     'property');
         setMeta('og:locale',      lang === 'bn' ? 'bn_BD' : 'en_US', 'property');
 
         // ── Twitter Card ──
@@ -100,7 +100,7 @@ export default function SEOHead({
         schemas.push({
             "@context": "https://schema.org",
             "@type": "MedicalOrganization",
-            "name": "BDCare – স্বাস্থ্য বন্ধু",
+            "name": "BD Care",
             "url": typeof window !== 'undefined' ? window.location.origin : 'https://bdcare.app',
             "description": "Bangladesh's AI-powered telemedicine and healthcare platform.",
             "areaServed": "BD",
