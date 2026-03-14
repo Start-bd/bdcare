@@ -66,7 +66,8 @@ function MedicineContent() {
                 items_json: JSON.stringify(cartItems),
                 total_amount: cartTotal,
                 payment_method: 'bkash',
-                delivery_status: 'confirmed',
+                delivery_status: 'pending',
+                payment_status: 'pending_verification',
             }).catch(() => {});
         }
         setShowPayment(false);
