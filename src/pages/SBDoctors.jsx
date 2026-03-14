@@ -68,8 +68,44 @@ function DoctorsContent() {
         setFiltered(result);
     }, [doctors, specialty, search, femaleOnly, sort]);
 
+    // Inject Doctors ItemList structured data once doctors are loaded
+    useEffect(() => {
+        if (doctors.length === 0) return;
+        document.querySelectorAll('script[data-doctors-seo]').forEach(s => s.remove());
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Doctors on স্বাস্থ্য বন্ধু",
+            "description": "Find specialist doctors in Bangladesh for online consultation",
+            "url": "https://bdcare.app/SBDoctors",
+            "numberOfItems": doctors.length,
+            "itemListElement": doctors.slice(0, 20).map((d, i) => ({
+                "@type": "ListItem",
+                "position": i + 1,
+                "item": {
+                    "@type": "Physician",
+                    "name": d.name_en,
+                    "medicalSpecialty": d.specialty,
+                    "description": d.qualifications,
+                    "worksFor": d.hospital ? { "@type": "MedicalOrganization", "name": d.hospital } : undefined
+                }
+            }))
+        };
+        const s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.setAttribute('data-doctors-seo', 'true');
+        s.textContent = JSON.stringify(schema);
+        document.head.appendChild(s);
+        return () => document.querySelectorAll('script[data-doctors-seo]').forEach(s => s.remove());
+    }, [doctors]);
+
     return (
         <div className="min-h-screen bg-[#f8faf9] pb-20 md:pb-0">
+            <GlobalSEO
+                title={isBn ? 'বিশেষজ্ঞ ডাক্তার খুঁজুন | স্বাস্থ্য বন্ধু | bdcare.app' : 'Find Specialist Doctors in Bangladesh | স্বাস্থ্য বন্ধু | bdcare.app'}
+                description={isBn ? 'বাংলাদেশের সেরা বিশেষজ্ঞ ডাক্তারদের খুঁজুন। ভিডিও পরামর্শ, অ্যাপয়েন্টমেন্ট এবং অনলাইন চিকিৎসা।' : 'Find the best specialist doctors in Bangladesh. Video consultation, appointments and online treatment.'}
+                lang={isBn ? 'bn' : 'en'}
+            />
             <TopNav user={user} />
 
             <main className="max-w-2xl mx-auto px-4 py-5">
