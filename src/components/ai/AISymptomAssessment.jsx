@@ -245,34 +245,35 @@ Important: This is preliminary advice only, not a diagnosis. Always recommend co
                                     <div key={doctor.id} className="p-4 bg-white rounded-lg shadow border hover:shadow-lg transition-all">
                                         <div className="flex items-start justify-between mb-3">
                                             <div>
-                                                <h4 className="font-bold text-lg">{doctor.full_name}</h4>
-                                                <p className="text-sm text-blue-600">
-                                                    {doctor.doctor_specializations?.join(', ')}
-                                                </p>
+                                                <h4 className="font-bold text-lg">{isBengali ? doctor.name_bn : doctor.name_en}</h4>
+                                                <p className="text-sm text-blue-600">{doctor.specialty}</p>
                                             </div>
-                                            <Badge className="bg-green-100 text-green-800">
-                                                {isBengali ? 'যাচাইকৃত' : 'Verified'}
-                                            </Badge>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
-                                            <span>{doctor.years_experience || 0} {isBengali ? 'বছর অভিজ্ঞতা' : 'years exp'}</span>
-                                            {doctor.hospital_name && (
-                                                <>
-                                                    <span>•</span>
-                                                    <span>{doctor.hospital_name}</span>
-                                                </>
+                                            {doctor.is_available && (
+                                                <Badge className="bg-green-100 text-green-800">
+                                                    {isBengali ? 'অনলাইন' : 'Online'}
+                                                </Badge>
                                             )}
                                         </div>
+                                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                                            <span>{doctor.experience_years || 0} {isBengali ? 'বছর অভিজ্ঞতা' : 'yrs exp'}</span>
+                                            {doctor.hospital && (
+                                                <>
+                                                    <span>•</span>
+                                                    <span>{doctor.hospital}</span>
+                                                </>
+                                            )}
+                                            {doctor.rating && <span>⭐ {doctor.rating?.toFixed(1)}</span>}
+                                        </div>
                                         <div className="flex gap-2">
-                                            <Link to={createPageUrl(`Profile?userId=${doctor.id}`)} className="flex-1">
+                                            <Link to={`${createPageUrl('SBDoctorProfile')}?id=${doctor.id}`} className="flex-1">
                                                 <Button variant="outline" className="w-full">
                                                     {isBengali ? 'প্রোফাইল দেখুন' : 'View Profile'}
                                                 </Button>
                                             </Link>
-                                            <Link to={createPageUrl(`Appointments?doctorId=${doctor.id}`)} className="flex-1">
+                                            <Link to={`${createPageUrl('SBDoctorProfile')}?id=${doctor.id}&tab=book`} className="flex-1">
                                                 <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
                                                     <Calendar className="w-4 h-4 mr-2" />
-                                                    {isBengali ? 'অ্যাপয়েন্টমেন্ট বুক করুন' : 'Book Appointment'}
+                                                    {isBengali ? 'বুক করুন' : 'Book'}
                                                 </Button>
                                             </Link>
                                         </div>
