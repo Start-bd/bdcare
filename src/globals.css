@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #0F6E56;
+  --primary-light: #1D9E75;
+  --primary-bg: #eefaf5;
+  --emergency: #D85A30;
+  --bg: #f8faf9;
+  --card-border: #e0e8e4;
+  --radius-card: 14px;
+  --radius-btn: 10px;
+}
+
+body {
+  font-family: 'Hind Siliguri', 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: #1a2e28;
+}
+
+.font-bengali { font-family: 'Hind Siliguri', sans-serif; }
+.font-english { font-family: 'DM Sans', sans-serif; }
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius-btn);
+  padding: 10px 20px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--primary-light); }
+
+.card-sb {
+  background: white;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 1px 4px rgba(15,110,86,0.06);
+}
+
+.green-gradient {
+  background: linear-gradient(135deg, #0F6E56 0%, #1D9E75 100%);
+}
+
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(216,90,48,0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 16px rgba(216,90,48,0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(216,90,48,0); }
+}
+
+.star-rating { color: #f59e0b; }
+
+/* Mobile bottom nav safe area */
+.bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
+}
