@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import LangToggle from '../components/sb/LangToggle';
-import SEOHead from '../components/seo/SEOHead';
+import GlobalSEO from '../components/seo/GlobalSEO';
 import {
     Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot,
     Star, ChevronRight, MapPin, Phone, MessageCircle, Instagram, Facebook, Twitter
@@ -44,6 +44,13 @@ function LandingContent() {
 
     return (
         <div className="min-h-screen bg-[#f8faf9] font-bengali">
+            <GlobalSEO
+                title="স্বাস্থ্য বন্ধু | Bangladesh's AI Health Companion | bdcare.app"
+                description={isBn
+                    ? 'বাংলাদেশের প্রথম AI স্বাস্থ্য সহায়ক। ডাক্তার পরামর্শ, ওষুধ ডেলিভারি, জরুরি সেবা এবং AI ডাক্তার — সব এক জায়গায়।'
+                    : "Bangladesh's first AI-powered healthcare platform. Doctor consultations, medicine delivery, emergency services and AI doctor — all in one place."}
+                lang={isBn ? 'bn' : 'en'}
+            />
             {/* Top bar */}
             <header className="bg-white border-b border-[#e0e8e4] sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
