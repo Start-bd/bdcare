@@ -6,7 +6,7 @@ import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
 import DoctorCard, { SPECIALTY_LABELS } from '../components/sb/DoctorCard';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Search, SlidersHorizontal, X, Stethoscope } from 'lucide-react';
 
 const FILTERS = [
     { key: 'all', bn: 'সব', en: 'All' },

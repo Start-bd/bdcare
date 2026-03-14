@@ -72,6 +72,8 @@ import Telemedicine from './pages/Telemedicine';
 import SBLanding from './pages/SBLanding';
 import SBDashboard from './pages/SBDashboard';
 import SBDoctors from './pages/SBDoctors';
+import SBDoctorProfile from './pages/SBDoctorProfile';
+import SBEmergency from './pages/SBEmergency';
 import __Layout from './Layout.jsx';
 
 
@@ -101,6 +103,8 @@ export const PAGES = {
     "SBLanding": SBLanding,
     "SBDashboard": SBDashboard,
     "SBDoctors": SBDoctors,
+    "SBDoctorProfile": SBDoctorProfile,
+    "SBEmergency": SBEmergency,
 }
 
 export const pagesConfig = {
