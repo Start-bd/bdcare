@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Hospital } from '@/entities/Hospital';
-import { BloodBank } from '@/entities/BloodBank';
-import { User } from '@/entities/User';
-import { EmergencyRequest } from '@/entities/EmergencyRequest';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 

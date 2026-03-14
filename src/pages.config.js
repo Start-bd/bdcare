@@ -66,18 +66,18 @@ import MedicalRecords from './pages/MedicalRecords';
 import MedicineChecker from './pages/MedicineChecker';
 import MyConsultations from './pages/MyConsultations';
 import Profile from './pages/Profile';
+import SBAIDoctor from './pages/SBAIDoctor';
+import SBDashboard from './pages/SBDashboard';
+import SBDoctorProfile from './pages/SBDoctorProfile';
+import SBDoctors from './pages/SBDoctors';
+import SBEmergency from './pages/SBEmergency';
+import SBLanding from './pages/SBLanding';
+import SBMedicine from './pages/SBMedicine';
+import SBProfile from './pages/SBProfile';
+import SBVault from './pages/SBVault';
 import Settings from './pages/Settings';
 import SkinChecker from './pages/SkinChecker';
 import Telemedicine from './pages/Telemedicine';
-import SBLanding from './pages/SBLanding';
-import SBDashboard from './pages/SBDashboard';
-import SBDoctors from './pages/SBDoctors';
-import SBDoctorProfile from './pages/SBDoctorProfile';
-import SBEmergency from './pages/SBEmergency';
-import SBMedicine from './pages/SBMedicine';
-import SBVault from './pages/SBVault';
-import SBAIDoctor from './pages/SBAIDoctor';
-import SBProfile from './pages/SBProfile';
 import __Layout from './Layout.jsx';
 
 
@@ -101,18 +101,18 @@ export const PAGES = {
     "MedicineChecker": MedicineChecker,
     "MyConsultations": MyConsultations,
     "Profile": Profile,
+    "SBAIDoctor": SBAIDoctor,
+    "SBDashboard": SBDashboard,
+    "SBDoctorProfile": SBDoctorProfile,
+    "SBDoctors": SBDoctors,
+    "SBEmergency": SBEmergency,
+    "SBLanding": SBLanding,
+    "SBMedicine": SBMedicine,
+    "SBProfile": SBProfile,
+    "SBVault": SBVault,
     "Settings": Settings,
     "SkinChecker": SkinChecker,
     "Telemedicine": Telemedicine,
-    "SBLanding": SBLanding,
-    "SBDashboard": SBDashboard,
-    "SBDoctors": SBDoctors,
-    "SBDoctorProfile": SBDoctorProfile,
-    "SBEmergency": SBEmergency,
-    "SBMedicine": SBMedicine,
-    "SBVault": SBVault,
-    "SBAIDoctor": SBAIDoctor,
-    "SBProfile": SBProfile,
 }
 
 export const pagesConfig = {

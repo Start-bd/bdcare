@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
-import { User } from "@/entities/User";
+import { base44 } from "@/api/base44Client";
 import SEOHead from "../components/seo/SEOHead";
 import WelcomeSection from "../components/dashboard/WelcomeSection";
 import QuickActions from "../components/dashboard/QuickActions";
