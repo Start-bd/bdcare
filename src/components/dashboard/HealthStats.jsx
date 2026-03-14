@@ -29,15 +29,13 @@ export default function HealthStats({ isBengali }) {
 
   const loadRealTimeStats = async () => {
     try {
-      // Load real-time data from entities
-      const [hospitals, bloodBanks, users, emergencyRequests] = await Promise.all([
-        Hospital.list('-created_date', 1000),
-        BloodBank.list('-created_date', 1000),
-        User.list('-created_date', 1000),
-        EmergencyRequest.list('-created_date', 1000)
+      const [hospitals, bloodBanks, doctors, emergencyRequests] = await Promise.all([
+        base44.entities.Hospital.list('-created_date', 200),
+        base44.entities.BloodBank.list('-created_date', 200),
+        base44.entities.Doctor.list('-created_date', 200),
+        base44.entities.EmergencyRequest.list('-created_date', 200),
       ]);
 
-      const doctorCount = users.filter(u => u.user_type === 'doctor' || u.role === 'doctor').length;
       const totalBloodDonors = bloodBanks.reduce((sum, bank) => {
         const inventory = bank.blood_inventory || {};
         return sum + Object.values(inventory).reduce((a, b) => a + (b || 0), 0);
@@ -46,7 +44,7 @@ export default function HealthStats({ isBengali }) {
       setStats({
         hospitals: hospitals.length,
         bloodDonors: totalBloodDonors,
-        doctors: doctorCount,
+        doctors: doctors.length,
         consultations: emergencyRequests.length
       });
     } catch (error) {

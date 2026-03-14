@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   const loadUser = async () => {
     try {
-      const currentUser = await User.me();
+      const currentUser = await base44.auth.me();
       setUser(currentUser);
       setIsBengali(currentUser.preferred_language === 'bengali' || currentUser.preferred_language === 'both');
     } catch (error) {

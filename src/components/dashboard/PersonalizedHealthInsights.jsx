@@ -42,7 +42,7 @@ export default function PersonalizedHealthInsights({ user: propUser, isBengali }
         `;
 
         try {
-            const result = await InvokeLLM({
+            const result = await base44.integrations.Core.InvokeLLM({
                 prompt,
                 response_json_schema: {
                     type: "object",
