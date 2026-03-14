@@ -32,8 +32,8 @@ function EmergencyContent() {
 
     const startSOS = () => {
         setSosActive(true);
-        setCountdown(3);
-        let c = 3;
+        setCountdown(5);
+        let c = 5;
         countInterval.current = setInterval(() => {
             c -= 1;
             setCountdown(c);
@@ -47,7 +47,7 @@ function EmergencyContent() {
     const cancelSOS = () => {
         setSosActive(false);
         setDispatched(false);
-        setCountdown(3);
+        setCountdown(5);
         clearInterval(countInterval.current);
     };
 
@@ -78,27 +78,103 @@ function EmergencyContent() {
 
                 {/* SOS Modal */}
                 {sosActive && (
-                    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-                        <div className="bg-white rounded-[14px] p-8 max-w-sm w-full text-center">
+                    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+                        <div className="bg-white rounded-2xl p-7 max-w-sm w-full text-center shadow-2xl">
                             {dispatched ? (
                                 <>
-                                    <div className="text-5xl mb-4">🚑</div>
-                                    <h3 className="text-xl font-bold text-[#D85A30] mb-2">{isBn ? 'অ্যাম্বুলেন্স ডাকা হয়েছে!' : 'Ambulance Dispatched!'}</h3>
-                                    <p className="text-gray-600 text-sm mb-2">{isBn ? 'আপনার লোকেশন শেয়ার করা হয়েছে' : 'Your location has been shared'}</p>
-                                    <p className="text-sm font-semibold text-[#0F6E56] mb-6">{isBn ? 'আনুমানিক সময়: ১০ মিনিট' : 'ETA: 10 minutes'}</p>
+                                    <div className="text-6xl mb-3 animate-bounce">🚑</div>
+                                    <h3 className="text-xl font-bold text-[#D85A30] mb-1">{isBn ? 'অ্যাম্বুলেন্স ডাকা হয়েছে!' : 'Ambulance Dispatched!'}</h3>
+                                    <p className="text-gray-500 text-sm mb-1">{isBn ? 'আপনার লোকেশন শেয়ার করা হয়েছে' : 'Your location has been shared'}</p>
+                                    {user?.district && (
+                                        <p className="text-xs font-semibold text-[#0F6E56] mb-3">📍 {user.district}</p>
+                                    )}
+                                    <p className="text-sm font-semibold text-[#0F6E56] mb-5">{isBn ? 'আনুমানিক সময়: ১০ মিনিট' : 'ETA: 10 minutes'}</p>
                                     <button onClick={cancelSOS} className="w-full py-3 bg-[#0F6E56] text-white rounded-[10px] font-bold">
                                         {isBn ? 'ঠিক আছে' : 'OK'}
                                     </button>
                                 </>
                             ) : (
                                 <>
-                                    <div className="w-20 h-20 rounded-full bg-[#D85A30] text-white text-4xl font-bold flex items-center justify-center mx-auto mb-4">
-                                        {countdown}
+                                    {/* Animated ambulance */}
+                                    <div className="relative h-20 overflow-hidden mb-4">
+                                        <style>{`
+                                            @keyframes ambulance-drive {
+                                                0%   { transform: translateX(-80px); }
+                                                100% { transform: translateX(340px); }
+                                            }
+                                            @keyframes siren-blink {
+                                                0%, 100% { opacity: 1; }
+                                                50%       { opacity: 0.2; }
+                                            }
+                                            .ambulance-move {
+                                                animation: ambulance-drive 1.8s linear infinite;
+                                                font-size: 3rem;
+                                                display: inline-block;
+                                            }
+                                            .siren-blink {
+                                                animation: siren-blink 0.5s ease-in-out infinite;
+                                            }
+                                        `}</style>
+                                        {/* Road stripe */}
+                                        <div className="absolute bottom-2 left-0 right-0 h-1 bg-gray-200 rounded" />
+                                        <span className="ambulance-move absolute bottom-3">🚑</span>
+                                        {/* Flashing siren dots */}
+                                        <span className="siren-blink absolute top-1 left-1/2 -translate-x-1/2 flex gap-1">
+                                            <span className="w-2 h-2 rounded-full bg-red-500 inline-block" />
+                                            <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" style={{ animationDelay: '0.25s' }} />
+                                        </span>
                                     </div>
-                                    <h3 className="text-lg font-bold text-gray-900 mb-1">{isBn ? 'অ্যাম্বুলেন্স ডাকা হচ্ছে...' : 'Calling Ambulance...'}</h3>
-                                    <p className="text-gray-500 text-sm mb-6">{isBn ? 'আপনার লোকেশন শেয়ার হচ্ছে' : 'Sharing your location'}</p>
-                                    <button onClick={cancelSOS} className="flex items-center gap-2 mx-auto text-gray-500 hover:text-red-500 text-sm">
-                                        <X className="w-4 h-4" /> {isBn ? 'বাতিল করুন' : 'Cancel'}
+
+                                    <h3 className="text-lg font-bold text-[#D85A30] mb-1">
+                                        {isBn ? 'অ্যাম্বুলেন্স ডাকা হচ্ছে' : 'Calling Ambulance'}
+                                    </h3>
+
+                                    {/* Countdown ring */}
+                                    <div className="flex items-center justify-center my-4">
+                                        <div className="relative w-20 h-20">
+                                            <svg className="w-20 h-20 -rotate-90" viewBox="0 0 80 80">
+                                                <circle cx="40" cy="40" r="34" fill="none" stroke="#f3f4f6" strokeWidth="6" />
+                                                <circle
+                                                    cx="40" cy="40" r="34"
+                                                    fill="none"
+                                                    stroke="#D85A30"
+                                                    strokeWidth="6"
+                                                    strokeLinecap="round"
+                                                    strokeDasharray={`${2 * Math.PI * 34}`}
+                                                    strokeDashoffset={`${2 * Math.PI * 34 * (1 - countdown / 5)}`}
+                                                    style={{ transition: 'stroke-dashoffset 1s linear' }}
+                                                />
+                                            </svg>
+                                            <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-[#D85A30]">
+                                                {countdown}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* User district */}
+                                    {user?.district && (
+                                        <p className="text-xs text-gray-500 mb-1">
+                                            📍 {isBn ? 'আপনার জেলা:' : 'Your district:'} <span className="font-semibold text-gray-700">{user.district}</span>
+                                        </p>
+                                    )}
+
+                                    {/* 3 nearest hospitals */}
+                                    <div className="bg-[#f8faf9] rounded-[10px] p-3 mb-5 text-left space-y-1.5">
+                                        <p className="text-xs font-semibold text-gray-500 mb-1">{isBn ? 'কাছের হাসপাতাল (ময়মনসিংহ)' : 'Nearest Hospitals (Mymensingh)'}</p>
+                                        {hospitals.map((h, i) => (
+                                            <div key={i} className="flex items-center gap-2 text-xs text-gray-700">
+                                                <span className="w-4 h-4 rounded-full bg-[#D85A30] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">{i + 1}</span>
+                                                <span className="font-medium">{isBn ? h.name : h.nameEn}</span>
+                                                <span className="ml-auto text-gray-400 flex-shrink-0">{isBn ? h.distBn : h.distEn}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <button
+                                        onClick={cancelSOS}
+                                        className="w-full py-3 rounded-[10px] border-2 border-gray-300 text-gray-600 font-bold hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <X className="w-4 h-4" /> বাতিল করুন
                                     </button>
                                 </>
                             )}
