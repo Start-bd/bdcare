@@ -46,11 +46,11 @@ function DoctorProfileContent() {
     const [booked, setBooked] = useState(false);
 
     const urlParams = new URLSearchParams(window.location.search);
-    const doctorId = window.location.pathname.split('/').pop() || urlParams.get('id');
+    const doctorId = urlParams.get('id');
 
     useEffect(() => {
         base44.auth.me().then(setUser).catch(() => {});
-        if (doctorId && doctorId !== 'SBDoctorProfile') {
+        if (doctorId) {
             base44.entities.Doctor.get(doctorId).then(d => { setDoctor(d); setLoading(false); }).catch(() => setLoading(false));
         } else {
             base44.entities.Doctor.list('-rating', 1).then(([d]) => { setDoctor(d); setLoading(false); }).catch(() => setLoading(false));

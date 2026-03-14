@@ -69,14 +69,14 @@ export default function DoctorCard({ doctor, compact = false }) {
                 {!compact && (
                     <div className="flex gap-2">
                         <Link
-                            to={`${createPageUrl('SBDoctors')}/${doctor.id}`}
+                            to={`${createPageUrl('SBDoctorProfile')}?id=${doctor.id}`}
                             className="flex items-center gap-1 px-3 py-1.5 bg-[#eefaf5] text-[#0F6E56] rounded-[10px] text-xs font-semibold hover:bg-[#0F6E56] hover:text-white transition-colors"
                         >
                             <Video className="w-3 h-3" />
                             {isBn ? 'পরামর্শ' : 'Consult'}
                         </Link>
                         <Link
-                            to={`${createPageUrl('SBDoctors')}/${doctor.id}?tab=book`}
+                            to={`${createPageUrl('SBDoctorProfile')}?id=${doctor.id}&tab=book`}
                             className="flex items-center gap-1 px-3 py-1.5 border border-[#0F6E56] text-[#0F6E56] rounded-[10px] text-xs font-semibold hover:bg-[#eefaf5] transition-colors"
                         >
                             <Calendar className="w-3 h-3" />
