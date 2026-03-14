@@ -69,6 +69,9 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import SkinChecker from './pages/SkinChecker';
 import Telemedicine from './pages/Telemedicine';
+import SBLanding from './pages/SBLanding';
+import SBDashboard from './pages/SBDashboard';
+import SBDoctors from './pages/SBDoctors';
 import __Layout from './Layout.jsx';
 
 
@@ -95,6 +98,9 @@ export const PAGES = {
     "Settings": Settings,
     "SkinChecker": SkinChecker,
     "Telemedicine": Telemedicine,
+    "SBLanding": SBLanding,
+    "SBDashboard": SBDashboard,
+    "SBDoctors": SBDoctors,
 }
 
 export const pagesConfig = {
