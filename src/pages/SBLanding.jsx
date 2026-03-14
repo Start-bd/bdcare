@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import LangToggle from '../components/sb/LangToggle';
+import SEOHead from '../components/seo/SEOHead';
 import {
     Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot,
     Star, ChevronRight, MapPin, Phone, MessageCircle, Instagram, Facebook, Twitter
