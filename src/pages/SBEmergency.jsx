@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
@@ -26,7 +26,7 @@ function EmergencyContent() {
     const holdTimer = useRef(null);
     const countInterval = useRef(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         import('@/api/base44Client').then(({ base44 }) => base44.auth.me().then(setUser).catch(() => {}));
     }, []);
 

@@ -74,6 +74,8 @@ import SBDashboard from './pages/SBDashboard';
 import SBDoctors from './pages/SBDoctors';
 import SBDoctorProfile from './pages/SBDoctorProfile';
 import SBEmergency from './pages/SBEmergency';
+import SBMedicine from './pages/SBMedicine';
+import SBVault from './pages/SBVault';
 import __Layout from './Layout.jsx';
 
 
@@ -105,6 +107,8 @@ export const PAGES = {
     "SBDoctors": SBDoctors,
     "SBDoctorProfile": SBDoctorProfile,
     "SBEmergency": SBEmergency,
+    "SBMedicine": SBMedicine,
+    "SBVault": SBVault,
 }
 
 export const pagesConfig = {
