@@ -75,7 +75,7 @@ function DoctorProfileContent() {
                 date_time: new Date(days[selectedDay].value + 'T' + (selectedSlot || '09:00')).toISOString(),
                 status: 'confirmed',
                 fee: fee,
-                payment_status: 'paid',
+                payment_status: 'pending_verification',
             }).catch(() => {});
         }
         setShowPayment(false);
