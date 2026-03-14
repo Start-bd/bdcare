@@ -99,7 +99,7 @@ export default function PersonalizedHealthInsights({ user: propUser, isBengali }
             }
         } else {
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 localStorage.setItem('cachedUser', JSON.stringify(currentUser));
                 await generateInsights(currentUser);

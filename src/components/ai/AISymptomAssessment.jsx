@@ -67,20 +67,17 @@ Important: This is preliminary advice only, not a diagnosis. Always recommend co
 
             setAssessment(aiResponse);
 
-            // Find doctors matching specializations
+            // Find doctors matching specializations from Doctor entity
             if (aiResponse.recommended_specializations?.length > 0) {
-                const allUsers = await base44.entities.User.list('-created_date', 100);
-                const doctors = allUsers.filter(u => 
-                    (u.user_type === 'doctor' || u.role === 'doctor') &&
-                    u.verification_status === 'verified' &&
-                    u.doctor_specializations?.some(spec => 
-                        aiResponse.recommended_specializations.some(recSpec => 
-                            spec.toLowerCase().includes(recSpec.toLowerCase()) ||
-                            recSpec.toLowerCase().includes(spec.toLowerCase())
-                        )
+                const allDoctors = await base44.entities.Doctor.list('-rating', 50);
+                const matched = allDoctors.filter(d =>
+                    d.is_available &&
+                    aiResponse.recommended_specializations.some(recSpec =>
+                        d.specialty?.toLowerCase().includes(recSpec.toLowerCase().split(' ')[0]) ||
+                        recSpec.toLowerCase().includes(d.specialty?.toLowerCase() || '')
                     )
                 );
-                setRecommendedDoctors(doctors.slice(0, 3));
+                setRecommendedDoctors(matched.slice(0, 3));
             }
 
             // Save consultation record
