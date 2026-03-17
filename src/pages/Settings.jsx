@@ -34,17 +34,17 @@ export default function SettingsPage() {
     const loadUserSettings = async () => {
         setIsLoading(true);
         try {
-            const currentUser = await User.me();
+            const currentUser = await base44.auth.me();
             setUser(currentUser);
             setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
             
             // Load user preferences
-            const userPrefs = await UserPreferences.filter({ user_id: currentUser.id });
+            const userPrefs = await base44.entities.UserPreferences.filter({ user_id: currentUser.id });
             if (userPrefs.length > 0) {
                 setPreferences(userPrefs[0]);
             } else {
                 // Create default preferences
-                const defaultPrefs = await UserPreferences.create({
+                const defaultPrefs = await base44.entities.UserPreferences.create({
                     user_id: currentUser.id,
                     notification_preferences: {
                         email_notifications: true,
@@ -73,7 +73,7 @@ export default function SettingsPage() {
             }
 
             // Load recent activity
-            const recentActivity = await UserActivityLog.filter({ user_id: currentUser.id }, '-created_date', 10);
+            const recentActivity = await base44.entities.UserActivityLog.filter({ user_id: currentUser.id }, '-created_date', 10);
             setActivityLog(recentActivity);
 
         } catch (error) {
@@ -96,11 +96,11 @@ export default function SettingsPage() {
                 }
             };
             
-            await UserPreferences.update(preferences.id, updatedPrefs);
+            await base44.entities.UserPreferences.update(preferences.id, updatedPrefs);
             setPreferences(updatedPrefs);
 
             // Log this activity
-            await UserActivityLog.create({
+            await base44.entities.UserActivityLog.create({
                 user_id: user.id,
                 activity_type: 'privacy_setting_change',
                 description: `Updated ${section}.${key} to ${value}`,
@@ -116,13 +116,13 @@ export default function SettingsPage() {
 
     const handleLogout = async () => {
         try {
-            await UserActivityLog.create({
+            await base44.entities.UserActivityLog.create({
                 user_id: user.id,
                 activity_type: 'login',
                 description: 'User logged out',
                 success: true
             });
-            await User.logout();
+            base44.auth.logout();
         } catch (error) {
             console.error('Logout failed:', error);
         }
@@ -130,7 +130,7 @@ export default function SettingsPage() {
 
     const exportUserData = async () => {
         try {
-            await UserActivityLog.create({
+            await base44.entities.UserActivityLog.create({
                 user_id: user.id,
                 activity_type: 'data_export',
                 description: 'User requested data export',
