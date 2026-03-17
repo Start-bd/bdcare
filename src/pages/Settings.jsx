@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '@/entities/User';
-import { UserPreferences } from '@/entities/UserPreferences';
-import { UserActivityLog } from '@/entities/UserActivityLog';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
