@@ -1,0 +1,24 @@
+# BDCare – robots.txt
+# https://bdcare.app
+
+User-agent: *
+
+# Block private/authenticated areas
+Disallow: /admin
+Disallow: /admin/
+Disallow: /doctor-dashboard
+Disallow: /doctor-dashboard/
+Disallow: /patient-dashboard
+Disallow: /patient-dashboard/
+Disallow: /patient-records
+Disallow: /patient-records/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /login
+Disallow: /register
+
+# Allow everything public
+Allow: /
+
+# Sitemap location
+Sitemap: https://bdcare.app/sitemap.xml
