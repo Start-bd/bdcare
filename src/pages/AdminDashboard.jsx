@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '@/entities/User';
+import { base44 } from '@/api/base44Client';
 import RouteGuard from '../components/routing/RouteGuard';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -20,7 +20,7 @@ function AdminDashboardContent() {
     useEffect(() => {
         const init = async () => {
             try {
-                const user = await User.me();
+                const user = await base44.auth.me();
                 setCurrentUser(user);
                 setIsBengali(user.preferred_language === 'bengali' || !user.preferred_language);
                 fetchUsers();
@@ -34,7 +34,7 @@ function AdminDashboardContent() {
     const fetchUsers = async () => {
         setIsLoading(true);
         try {
-            const allUsers = await User.list();
+            const allUsers = await base44.entities.User.list();
             setUsers(allUsers);
         } catch (err) {
             setError('Failed to fetch users.');
@@ -45,7 +45,7 @@ function AdminDashboardContent() {
 
     const handleVerificationChange = async (userId, status) => {
         try {
-            await User.update(userId, { verification_status: status });
+            await base44.entities.User.update(userId, { verification_status: status });
             fetchUsers(); // Refresh the list
         } catch (err) {
             alert('Failed to update verification status.');
@@ -54,7 +54,7 @@ function AdminDashboardContent() {
 
     const handleRoleChange = async (userId, role) => {
         try {
-            await User.update(userId, { role: role });
+            await base44.entities.User.update(userId, { role: role });
             fetchUsers(); // Refresh the list
         } catch (err) {
             alert('Failed to update role.');
@@ -63,7 +63,7 @@ function AdminDashboardContent() {
     
     const handleUserTypeChange = async (userId, user_type) => {
         try {
-            await User.update(userId, { user_type: user_type });
+            await base44.entities.User.update(userId, { user_type: user_type });
             fetchUsers(); // Refresh the list
         } catch (err) {
             alert('Failed to update user type.');
