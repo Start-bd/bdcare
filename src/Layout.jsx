@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { User } from "@/entities/User";
+import { base44 } from "@/api/base44Client";
 import {
   Heart,
   MapPin,
@@ -35,7 +35,7 @@ import {
 "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import OfflineIndicator from "../components/OfflineIndicator";
+import OfflineIndicator from "./components/OfflineIndicator";
 
 const navigationItems = [
 {
@@ -183,7 +183,7 @@ export default function Layout({ children, currentPageName }) {
 
   const loadUser = async () => {
     try {
-      const currentUser = await User.me();
+      const currentUser = await base44.auth.me();
       setUser(currentUser);
       setIsBengali(currentUser.preferred_language === 'bengali' || currentUser.preferred_language === 'both');
     } catch (error) {
