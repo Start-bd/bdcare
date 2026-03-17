@@ -18,7 +18,7 @@ export default function DrugInteractionCheckerPage() {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
                 if (currentUser.medications && currentUser.medications.length > 0) {
@@ -66,7 +66,7 @@ export default function DrugInteractionCheckerPage() {
         }`;
 
         try {
-            const result = await InvokeLLM({
+            const result = await base44.integrations.Core.InvokeLLM({
                 prompt,
                 response_json_schema: {
                     type: "object",
