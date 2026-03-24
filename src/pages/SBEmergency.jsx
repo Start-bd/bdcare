@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
+import { base44 } from '@/api/base44Client';
 import { PhoneCall, AlertCircle, X } from 'lucide-react';
 
 const emergencyServices = [
@@ -27,7 +28,7 @@ function EmergencyContent() {
     const countInterval = useRef(null);
 
     useEffect(() => {
-        import('@/api/base44Client').then(({ base44 }) => base44.auth.me().then(setUser).catch(() => {}));
+        base44.auth.me().then(setUser).catch(() => {});
     }, []);
 
     const startSOS = () => {

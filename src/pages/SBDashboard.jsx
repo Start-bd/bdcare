@@ -7,7 +7,6 @@ import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
 import DoctorCard from '../components/sb/DoctorCard';
 import { Search, Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot, Video, Calendar, ChevronRight, Zap } from 'lucide-react';
-import { base44 as sdk } from '@/api/base44Client';
 
 const services = [
     { icon: Stethoscope, bn: 'ডাক্তার', en: 'Doctors', color: 'bg-emerald-100 text-emerald-600', page: 'SBDoctors' },
@@ -35,8 +34,8 @@ function DashboardContent() {
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        sdk.auth.me().then(setUser).catch(() => {});
-        sdk.entities.Doctor.list('-rating', 3).then(setDoctors).catch(() => {});
+        base44.auth.me().then(setUser).catch(() => {});
+        base44.entities.Doctor.list('-rating', 3).then(setDoctors).catch(() => {});
     }, []);
 
     return (

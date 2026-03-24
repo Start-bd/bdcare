@@ -3,7 +3,7 @@ import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
 import { base44 } from '@/api/base44Client';
-import { Upload, Shield, FileText, FlaskConical, Image, Syringe, File, Share2, Trash2, Link, X } from 'lucide-react';
+import { Upload, Shield, FileText, FlaskConical, Image, Syringe, File, Share2, Trash2, Link2, X } from 'lucide-react';
 
 const RECORD_TYPES = [
     { key: 'blood_test', icon: FlaskConical, labelBn: 'রক্ত পরীক্ষা', labelEn: 'Blood Test', color: 'text-red-500 bg-red-50' },
@@ -169,7 +169,7 @@ function VaultContent() {
             {shareToken && (
                 <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
                     <div className="bg-white rounded-[14px] p-6 max-w-sm w-full text-center">
-                        <Link className="w-12 h-12 text-[#0F6E56] mx-auto mb-3" />
+                        <Link2 className="w-12 h-12 text-[#0F6E56] mx-auto mb-3" />
                         <h3 className="font-bold text-gray-900 mb-2">{isBn ? 'শেয়ার লিংক তৈরি হয়েছে' : 'Share Link Created'}</h3>
                         <p className="font-mono text-sm bg-[#eefaf5] p-2 rounded-[8px] mb-4 break-all">{shareToken}</p>
                         <p className="text-xs text-gray-500 mb-4">{isBn ? 'এই কোড ডাক্তারকে দিন' : 'Share this code with your doctor'}</p>

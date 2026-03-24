@@ -123,7 +123,18 @@ const insightsTools = [
 }];
 
 
-export default function Layout({ children, currentPageName }) {
+// Pages that manage their own nav (TopNav + BottomNav) — skip sidebar layout
+const STANDALONE_PAGES = new Set([
+  'SBLanding', 'SBDashboard', 'SBDoctors', 'SBDoctorProfile',
+  'SBAIDoctor', 'SBMedicine', 'SBEmergency', 'SBProfile', 'SBVault',
+]);
+
+// Standalone wrapper — no sidebar, no layout chrome
+function StandaloneLayout({ children }) {
+  return <>{children}</>;
+}
+
+function SidebarLayout({ children, currentPageName }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -316,7 +327,6 @@ export default function Layout({ children, currentPageName }) {
           <p className="text-emerald-700 font-medium">স্বাস্থ্য এজেন্ট লোড হচ্ছে...</p>
         </div>
       </div>);
-
   }
 
   return (
@@ -576,5 +586,11 @@ export default function Layout({ children, currentPageName }) {
         </div>
       </SidebarProvider>
     </div>);
+}
 
+export default function Layout({ children, currentPageName }) {
+  if (STANDALONE_PAGES.has(currentPageName)) {
+    return <StandaloneLayout>{children}</StandaloneLayout>;
+  }
+  return <SidebarLayout currentPageName={currentPageName}>{children}</SidebarLayout>;
 }
