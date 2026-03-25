@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Hospital } from '@/entities/Hospital';
-import { User } from '@/entities/User';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -32,7 +31,7 @@ export default function HospitalsPage() {
 
     const loadUserData = useCallback(async () => {
         try {
-            const currentUser = await User.me();
+            const currentUser = await base44.auth.me();
             setUser(currentUser);
             setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
         } catch (e) { /* Not logged in */ }
@@ -56,7 +55,7 @@ export default function HospitalsPage() {
         } else {
             console.log("App is online. Fetching from network.");
             try {
-                const fetchedHospitals = await Hospital.list('-updated_date', 500);
+                const fetchedHospitals = await base44.entities.Hospital.list('-updated_date', 500);
                 setHospitals(fetchedHospitals);
 
                 const cachePayload = {

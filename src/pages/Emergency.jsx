@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { User } from '@/entities/User';
-import { EmergencyRequest } from '@/entities/EmergencyRequest';
+import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -12,8 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import LiveEmergencyChat from '../components/emergency/LiveEmergencyChat';
 import EmergencyTracker from '../components/emergency/EmergencyTracker';
 import VideoConsultation from '../components/emergency/VideoConsultation';
-import { UserPreferences } from '@/entities/UserPreferences';
-import { SendEmail } from '@/integrations/Core';
+
 import {
   Select,
   SelectContent,
@@ -30,41 +27,18 @@ import {
  * @param {string} body - The email body (can be HTML).
  * @param {boolean} isBengali - Whether to use Bengali titles.
  */
-async function sendNotification(userId, preferenceKey, subject, body, isBengali) {
+async function sendNotification(user, subject, body, isBengali) {
   try {
-    const userToNotify = await User.get(userId);
-    if (!userToNotify || !userToNotify.email) {
-      console.error("Notification failed: User not found or has no email.", userId);
-      return;
-    }
-
-    const userPrefsList = await UserPreferences.filter({ user_id: userId }, '-created_date', 1);
-    const userPrefs = userPrefsList.length > 0 ? userPrefsList[0] : null;
-
-    const canSend = userPrefs ? userPrefs.notification_preferences?.[preferenceKey] !== false : true;
-    
-    if (canSend) {
-      await SendEmail({
-        to: userToNotify.email,
-        subject: `[${isBengali ? 'স্বাস্থ্য এজেন্ট' : 'Health Agent'}] ${subject}`,
-        body: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-            <h2>${isBengali ? 'নমস্কার' : 'Hello'} ${userToNotify.full_name},</h2>
-            ${body}
-            <hr style="margin: 20px 0;" />
-            <p style="font-size: 12px; color: #888;">
-              ${isBengali 
-                ? 'আপনি এই ইমেলটি পেয়েছেন কারণ আপনি স্বাস্থ্য এজেন্ট অ্যাপে বিজ্ঞপ্তি সক্রিয় করেছেন। আপনি আপনার অ্যাপের সেটিংস থেকে এই পছন্দগুলি পরিচালনা করতে পারেন।' 
-                : 'You received this email because you have notifications enabled in the Health Agent app. You can manage these preferences in your app settings.'}
-            </p>
-            <p style="font-size: 12px; color: #888;"><strong>স্বাস্থ্য এজেন্ট - Shasthya Bondhu</strong></p>
-          </div>
-        `
-      });
-      console.log(`Notification sent to ${userToNotify.email}`);
-    } else {
-      console.log(`Notification skipped for ${userToNotify.email} due to user preferences.`);
-    }
+    if (!user?.email) return;
+    await base44.integrations.Core.SendEmail({
+      to: user.email,
+      subject: `[${isBengali ? 'স্বাস্থ্য এজেন্ট' : 'Health Agent'}] ${subject}`,
+      body: `<div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2>${isBengali ? 'নমস্কার' : 'Hello'} ${user.full_name},</h2>
+        ${body}
+        <p style="font-size: 12px; color: #888;"><strong>স্বাস্থ্য এজেন্ট - Shasthya Bondhu</strong></p>
+      </div>`
+    });
   } catch (error) {
     console.error("Failed to send notification:", error);
   }
@@ -100,7 +74,7 @@ export default function EmergencyPage() {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 setFormData(prev => ({ 
                     ...prev, 
@@ -174,7 +148,7 @@ export default function EmergencyPage() {
             if (!requestData.patient_name) requestData.patient_name = 'Guest User';
             if (!requestData.patient_phone) requestData.patient_phone = 'N/A';
 
-            const request = await EmergencyRequest.create(requestData);
+            const request = await base44.entities.EmergencyRequest.create(requestData);
             
             setActiveRequest(request);
             setSubmissionStatus({ 
@@ -192,7 +166,7 @@ export default function EmergencyPage() {
                     <p><strong>${isBengali ? 'ট্র্যাকিং আইডি:' : 'Tracking ID:'}</strong> ${request.id}</p>
                     <p>${isBengali ? 'জরুরি প্রয়োজনে, অবিলম্বে <b>৯৯৯</b> নম্বরে কল করুন।' : 'In a critical emergency, please call <b>999</b> immediately.'}</p>
                 `;
-                await sendNotification(user.id, 'emergency_alerts', subject, body, isBengali);
+                await sendNotification(user, subject, body, isBengali);
             }
             // --- End Notification ---
 

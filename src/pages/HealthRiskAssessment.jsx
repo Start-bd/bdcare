@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '@/entities/User';
-import { InvokeLLM } from '@/integrations/Core';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -60,7 +59,7 @@ export default function HealthRiskAssessmentPage() {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
                 
@@ -121,7 +120,7 @@ export default function HealthRiskAssessmentPage() {
         }`;
 
         try {
-            const result = await InvokeLLM({
+            const result = await base44.integrations.Core.InvokeLLM({
                 prompt,
                 response_json_schema: {
                     type: "object",

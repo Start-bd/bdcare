@@ -1,20 +1,13 @@
-/**
- * pages.config.js - Page routing configuration
- *
- * THE ONLY EDITABLE VALUE: mainPage
- * This controls which page is the landing page (shown when users visit the app).
- *
- * FIXED (2026-03-14):
- *  - mainPage changed from "Dashboard" → "SBLanding" (P0 routing fix)
- *  - Removed legacy duplicate pages (AIConsultation, Analytics, Appointments,
- *    BloodBank, Dashboard, DoctorConsultations, DoctorProfile, Doctors,
- *    Emergency, Forum, HealthRiskAssessment, Home, Hospitals, MedicalRecords,
- *    MedicineChecker, MyConsultations, Profile, SkinChecker, Telemedicine)
- *    in favour of the SB* equivalents.
- *  - Kept: AdminDashboard, DrugInteractionChecker, Settings (no SB equivalent)
- */
 import AdminDashboard from './pages/AdminDashboard';
+import Analytics from './pages/Analytics';
+import Appointments from './pages/Appointments';
+import BloodBank from './pages/BloodBank';
 import DrugInteractionChecker from './pages/DrugInteractionChecker';
+import Emergency from './pages/Emergency';
+import Forum from './pages/Forum';
+import HealthRiskAssessment from './pages/HealthRiskAssessment';
+import Hospitals from './pages/Hospitals';
+import MedicineChecker from './pages/MedicineChecker';
 import SBAIDoctor from './pages/SBAIDoctor';
 import SBDashboard from './pages/SBDashboard';
 import SBDoctorProfile from './pages/SBDoctorProfile';
@@ -25,11 +18,20 @@ import SBMedicine from './pages/SBMedicine';
 import SBProfile from './pages/SBProfile';
 import SBVault from './pages/SBVault';
 import Settings from './pages/Settings';
+import SkinChecker from './pages/SkinChecker';
 import __Layout from './Layout.jsx';
 
 export const PAGES = {
   "AdminDashboard": AdminDashboard,
+  "Analytics": Analytics,
+  "Appointments": Appointments,
+  "BloodBank": BloodBank,
   "DrugInteractionChecker": DrugInteractionChecker,
+  "Emergency": Emergency,
+  "Forum": Forum,
+  "HealthRiskAssessment": HealthRiskAssessment,
+  "Hospitals": Hospitals,
+  "MedicineChecker": MedicineChecker,
   "SBAIDoctor": SBAIDoctor,
   "SBDashboard": SBDashboard,
   "SBDoctorProfile": SBDoctorProfile,
@@ -40,6 +42,7 @@ export const PAGES = {
   "SBProfile": SBProfile,
   "SBVault": SBVault,
   "Settings": Settings,
+  "SkinChecker": SkinChecker,
 }
 
 export const pagesConfig = {

@@ -1,7 +1,5 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
-import { BloodBank as BloodBankEntity } from '@/entities/BloodBank';
-import { User } from '@/entities/User';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
@@ -126,13 +124,13 @@ export default function BloodBankPage() {
             }
         } else {
             try {
-                const user = await User.me();
+                const user = await base44.auth.me();
                 setIsBengali(user.preferred_language === 'bengali' || !user.preferred_language);
                 localStorage.setItem('cachedUser', JSON.stringify(user));
             } catch (e) { /* not logged in */ }
             
             try {
-                const data = await BloodBankEntity.list();
+                const data = await base44.entities.BloodBank.list();
                 setBloodBanks(data);
                 setFilteredBanks(data);
                 setDistricts([...new Set(data.map(b => b.district))].sort());

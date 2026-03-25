@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '@/entities/User';
-import { UploadFile, InvokeLLM } from '@/integrations/Core';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,7 +26,7 @@ export default function SkinCheckerPage() {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
             } catch (e) { /* Not logged in */ }
@@ -91,8 +90,8 @@ export default function SkinCheckerPage() {
         Focus on common skin issues in Bangladesh: fungal infections, heat rash, insect bites, allergic reactions, bacterial infections, etc.`;
 
         try {
-            const { file_url } = await UploadFile({ file });
-            const analysisResult = await InvokeLLM({
+            const { file_url } = await base44.integrations.Core.UploadFile({ file });
+            const analysisResult = await base44.integrations.Core.InvokeLLM({
                 prompt,
                 file_urls: [file_url],
                 response_json_schema: {

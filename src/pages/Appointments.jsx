@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { User } from '@/entities/User';
+import { base44 } from '@/api/base44Client';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, CheckCircle } from 'lucide-react';
 import AppointmentBooking from '../components/appointments/AppointmentBooking';
@@ -20,7 +20,7 @@ export default function AppointmentsPage() {
         const loadUser = async () => {
             setIsLoading(true);
             try {
-                const currentUser = await User.me();
+                const currentUser = await base44.auth.me();
                 setUser(currentUser);
                 setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
             } catch (e) { /* not logged in */ }

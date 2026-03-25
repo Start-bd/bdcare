@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ForumPost as ForumPostEntity } from '@/entities/ForumPost';
-import { User } from '@/entities/User';
+import { base44 } from '@/api/base44Client';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -139,12 +138,12 @@ export default function ForumPage() {
     const loadData = async () => {
         setIsLoading(true);
         try {
-            const currentUser = await User.me();
+            const currentUser = await base44.auth.me();
             setUser(currentUser);
             setIsBengali(currentUser.preferred_language === 'bengali' || !currentUser.preferred_language);
         } catch(e) { /* not logged in */ }
         
-        const data = await ForumPostEntity.list('-created_date');
+        const data = await base44.entities.ForumPost.list('-created_date');
         setPosts(data);
         applyFilters(data, filters, activeTab);
         setIsLoading(false);
