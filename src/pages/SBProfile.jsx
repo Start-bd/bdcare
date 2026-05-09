@@ -48,6 +48,7 @@ function ProfileContent() {
         { icon: Globe, labelBn: 'ভাষা পরিবর্তন', labelEn: 'Language Setting', action: toggleLang },
         { icon: Bell, labelBn: 'নোটিফিকেশন', labelEn: 'Notifications', action: () => navigate(createPageUrl('Settings')) },
         { icon: Pill, labelBn: 'ওষুধ রিমাইন্ডার', labelEn: 'Medicine Reminders', action: () => navigate(createPageUrl('MedicineReminder')) },
+        { icon: Bell, labelBn: 'লক্ষণ ট্র্যাকার', labelEn: 'Symptom Tracker', action: () => navigate(createPageUrl('SymptomTracker')) },
     ];
 
     return (

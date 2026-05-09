@@ -6,7 +6,7 @@ import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
 import DoctorCard from '../components/sb/DoctorCard';
-import { Search, Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot, Video, Calendar, ChevronRight, Zap } from 'lucide-react';
+import { Search, Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot, Video, Calendar, ChevronRight, Zap, Activity } from 'lucide-react';
 
 const services = [
     { icon: Stethoscope, bn: 'ডাক্তার', en: 'Doctors', color: 'bg-emerald-100 text-emerald-600', page: 'SBDoctors' },
@@ -17,6 +17,7 @@ const services = [
     { icon: Home, bn: 'হোম কেয়ার', en: 'Home Care', color: 'bg-orange-100 text-orange-600', page: 'SBEmergency' },
     { icon: Shield, bn: 'ভল্ট', en: 'Vault', color: 'bg-indigo-100 text-indigo-600', page: 'SBVault' },
     { icon: Bot, bn: 'AI বন্ধু', en: 'AI Doc', color: 'bg-teal-100 text-teal-600', page: 'SBAIDoctor' },
+    { icon: Activity, bn: 'লক্ষণ ট্র্যাকার', en: 'Symptoms', color: 'bg-purple-100 text-purple-600', page: 'SymptomTracker' },
 ];
 
 function getGreeting(isBn) {
