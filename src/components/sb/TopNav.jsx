@@ -50,9 +50,9 @@ export default function TopNav({ user }) {
                             </div>
                         </>
                     ) : (
-                        <Link to={createPageUrl('SBLanding')} className="btn-primary text-sm px-4 py-2 rounded-[10px]">
+                        <button onClick={() => base44.auth.redirectToLogin(window.location.pathname)} className="btn-primary text-sm px-4 py-2 rounded-[10px]">
                             {isBn ? 'লগইন' : 'Login'}
-                        </Link>
+                        </button>
                     )}
                 </div>
             </div>

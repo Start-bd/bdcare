@@ -5,6 +5,7 @@ import BottomNav from '../components/sb/BottomNav';
 import PaymentModal from '../components/sb/PaymentModal';
 import { base44 } from '@/api/base44Client';
 import { Search, ShoppingCart, Upload, Plus, Minus, X, Check } from 'lucide-react';
+import { useRef } from 'react';
 
 const CAT_FILTERS = [
     { key: 'all', bn: 'সব', en: 'All' },
@@ -18,6 +19,7 @@ const CAT_FILTERS = [
 
 function MedicineContent() {
     const { isBn } = useLang();
+    const prescriptionInputRef = useRef(null);
     const [user, setUser] = useState(null);
     const [medicines, setMedicines] = useState([]);
     const [filtered, setFiltered] = useState([]);
@@ -109,7 +111,13 @@ function MedicineContent() {
                 </div>
 
                 {/* Prescription upload */}
-                <button className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed border-[#0F6E56] rounded-[14px] text-[#0F6E56] mb-4 hover:bg-[#eefaf5] transition-colors">
+                <input ref={prescriptionInputRef} type="file" accept="image/*,.pdf" className="hidden" onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const { file_url } = await base44.integrations.Core.UploadFile({ file });
+                    alert(isBn ? `প্রেসক্রিপশন আপলোড হয়েছে!` : `Prescription uploaded successfully!`);
+                }} />
+                <button onClick={() => prescriptionInputRef.current?.click()} className="w-full flex items-center justify-center gap-2 p-3 border-2 border-dashed border-[#0F6E56] rounded-[14px] text-[#0F6E56] mb-4 hover:bg-[#eefaf5] transition-colors">
                     <Upload className="w-4 h-4" />
                     <span className="text-sm font-semibold">{isBn ? 'প্রেসক্রিপশন আপলোড করুন' : 'Upload Prescription'}</span>
                 </button>

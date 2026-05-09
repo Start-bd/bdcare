@@ -11,10 +11,10 @@ import { Search, Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield
 const services = [
     { icon: Stethoscope, bn: 'ডাক্তার', en: 'Doctors', color: 'bg-emerald-100 text-emerald-600', page: 'SBDoctors' },
     { icon: Pill, bn: 'ওষুধ', en: 'Medicine', color: 'bg-blue-100 text-blue-600', page: 'SBMedicine' },
-    { icon: FlaskConical, bn: 'ল্যাব টেস্ট', en: 'Lab Test', color: 'bg-purple-100 text-purple-600', page: 'SBDashboard' },
-    { icon: Heart, bn: 'প্যাকেজ', en: 'Packages', color: 'bg-pink-100 text-pink-600', page: 'SBDashboard' },
+    { icon: FlaskConical, bn: 'ল্যাব টেস্ট', en: 'Lab Test', color: 'bg-purple-100 text-purple-600', page: 'Hospitals' },
+    { icon: Heart, bn: 'প্যাকেজ', en: 'Packages', color: 'bg-pink-100 text-pink-600', page: 'SBDoctors' },
     { icon: PhoneCall, bn: 'জরুরি', en: 'Emergency', color: 'bg-red-100 text-red-600', page: 'SBEmergency' },
-    { icon: Home, bn: 'হোম কেয়ার', en: 'Home Care', color: 'bg-orange-100 text-orange-600', page: 'SBDashboard' },
+    { icon: Home, bn: 'হোম কেয়ার', en: 'Home Care', color: 'bg-orange-100 text-orange-600', page: 'SBEmergency' },
     { icon: Shield, bn: 'ভল্ট', en: 'Vault', color: 'bg-indigo-100 text-indigo-600', page: 'SBVault' },
     { icon: Bot, bn: 'AI বন্ধু', en: 'AI Doc', color: 'bg-teal-100 text-teal-600', page: 'SBAIDoctor' },
 ];

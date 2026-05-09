@@ -175,7 +175,7 @@ function EmergencyContent() {
                                         onClick={cancelSOS}
                                         className="w-full py-3 rounded-[10px] border-2 border-gray-300 text-gray-600 font-bold hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-colors flex items-center justify-center gap-2"
                                     >
-                                        <X className="w-4 h-4" /> বাতিল করুন
+                                        <X className="w-4 h-4" /> {isBn ? 'বাতিল করুন' : 'Cancel'}
                                     </button>
                                 </>
                             )}

@@ -41,12 +41,12 @@ function ProfileContent() {
     };
 
     const menuItems = [
-        { icon: Calendar, labelBn: 'আমার অ্যাপয়েন্টমেন্ট', labelEn: 'My Appointments', action: () => {} },
+        { icon: Calendar, labelBn: 'আমার অ্যাপয়েন্টমেন্ট', labelEn: 'My Appointments', action: () => navigate(createPageUrl('Appointments')) },
         { icon: Shield, labelBn: 'হেলথ রেকর্ড', labelEn: 'Health Records', action: () => navigate(createPageUrl('SBVault')) },
-        { icon: Pill, labelBn: 'প্রেসক্রিপশন', labelEn: 'Prescriptions', action: () => {} },
-        { icon: CreditCard, labelBn: 'পেমেন্ট ইতিহাস', labelEn: 'Payment History', action: () => {} },
+        { icon: Pill, labelBn: 'প্রেসক্রিপশন', labelEn: 'Prescriptions', action: () => navigate(createPageUrl('SBVault')) },
+        { icon: CreditCard, labelBn: 'পেমেন্ট ইতিহাস', labelEn: 'Payment History', action: () => navigate(createPageUrl('Appointments')) },
         { icon: Globe, labelBn: 'ভাষা পরিবর্তন', labelEn: 'Language Setting', action: toggleLang },
-        { icon: Bell, labelBn: 'নোটিফিকেশন', labelEn: 'Notifications', action: () => {} },
+        { icon: Bell, labelBn: 'নোটিফিকেশন', labelEn: 'Notifications', action: () => navigate(createPageUrl('Settings')) },
     ];
 
     return (
