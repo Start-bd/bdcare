@@ -1,4 +1,5 @@
 import AdminDashboard from './pages/AdminDashboard';
+import MedicineReminder from './pages/MedicineReminder';
 import Analytics from './pages/Analytics';
 import Appointments from './pages/Appointments';
 import BloodBank from './pages/BloodBank';
@@ -32,6 +33,7 @@ export const PAGES = {
   "HealthRiskAssessment": HealthRiskAssessment,
   "Hospitals": Hospitals,
   "MedicineChecker": MedicineChecker,
+  "MedicineReminder": MedicineReminder,
   "SBAIDoctor": SBAIDoctor,
   "SBDashboard": SBDashboard,
   "SBDoctorProfile": SBDoctorProfile,

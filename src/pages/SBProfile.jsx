@@ -47,6 +47,7 @@ function ProfileContent() {
         { icon: CreditCard, labelBn: 'পেমেন্ট ইতিহাস', labelEn: 'Payment History', action: () => navigate(createPageUrl('Appointments')) },
         { icon: Globe, labelBn: 'ভাষা পরিবর্তন', labelEn: 'Language Setting', action: toggleLang },
         { icon: Bell, labelBn: 'নোটিফিকেশন', labelEn: 'Notifications', action: () => navigate(createPageUrl('Settings')) },
+        { icon: Pill, labelBn: 'ওষুধ রিমাইন্ডার', labelEn: 'Medicine Reminders', action: () => navigate(createPageUrl('MedicineReminder')) },
     ];
 
     return (
