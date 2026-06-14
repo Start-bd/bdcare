@@ -1,0 +1,154 @@
+{
+  "name": "EmergencyResponse",
+  "type": "object",
+  "properties": {
+    "emergency_request_id": {
+      "type": "string",
+      "description": "Reference to the original emergency request"
+    },
+    "responder_id": {
+      "type": "string",
+      "description": "ID of the responding medical professional"
+    },
+    "responder_name": {
+      "type": "string"
+    },
+    "responder_type": {
+      "type": "string",
+      "enum": [
+        "doctor",
+        "paramedic",
+        "nurse",
+        "dispatcher"
+      ],
+      "description": "Type of emergency responder"
+    },
+    "hospital_id": {
+      "type": "string",
+      "description": "Assigned hospital for the emergency"
+    },
+    "ambulance_unit": {
+      "type": "string",
+      "description": "Assigned ambulance unit identifier"
+    },
+    "response_status": {
+      "type": "string",
+      "enum": [
+        "dispatched",
+        "en_route",
+        "arrived",
+        "transporting",
+        "completed"
+      ],
+      "default": "dispatched"
+    },
+    "estimated_arrival": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_arrival": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "current_location": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "vital_signs": {
+      "type": "object",
+      "properties": {
+        "blood_pressure": {
+          "type": "string"
+        },
+        "heart_rate": {
+          "type": "number"
+        },
+        "temperature": {
+          "type": "number"
+        },
+        "oxygen_level": {
+          "type": "number"
+        }
+      }
+    },
+    "treatment_notes": {
+      "type": "string"
+    },
+    "medications_given": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "emergency_request_id",
+    "responder_id",
+    "response_status"
+  ],
+  "access_rules": {
+    "read": [
+      "owner",
+      "role:admin",
+      "role:doctor"
+    ],
+    "write": [
+      "role:admin",
+      "role:doctor"
+    ]
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$in": [
+            "admin",
+            "doctor"
+          ]
+        }
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.patient_id": "{{user.id}}"
+        },
+        {
+          "data.responder_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.responder_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

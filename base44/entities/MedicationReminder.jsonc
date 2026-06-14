@@ -1,0 +1,113 @@
+{
+  "name": "MedicationReminder",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User who needs the reminder"
+    },
+    "medical_record_id": {
+      "type": "string",
+      "description": "Associated medical record if any"
+    },
+    "medication_name": {
+      "type": "string",
+      "description": "Name of the medication"
+    },
+    "dosage": {
+      "type": "string",
+      "description": "Dosage information"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "once_daily",
+        "twice_daily",
+        "three_times_daily",
+        "four_times_daily",
+        "as_needed",
+        "custom"
+      ],
+      "description": "How often to take"
+    },
+    "times": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Specific times (e.g., ['08:00', '14:00', '20:00'])"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Special instructions (before/after food, etc.)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "reminder_enabled": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "user_id",
+    "medication_name",
+    "frequency",
+    "start_date"
+  ],
+  "access_rules": {
+    "read": "owner",
+    "write": "owner"
+  },
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

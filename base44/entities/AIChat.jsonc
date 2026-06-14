@@ -1,0 +1,57 @@
+{
+  "name": "AIChat",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "messages_json": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

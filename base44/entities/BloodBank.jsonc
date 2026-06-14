@@ -1,0 +1,101 @@
+{
+  "name": "BloodBank",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Blood bank name"
+    },
+    "hospital_id": {
+      "type": "string",
+      "description": "Associated hospital ID"
+    },
+    "district": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "emergency_phone": {
+      "type": "string"
+    },
+    "blood_inventory": {
+      "type": "object",
+      "properties": {
+        "A_positive": {
+          "type": "number",
+          "default": 0
+        },
+        "A_negative": {
+          "type": "number",
+          "default": 0
+        },
+        "B_positive": {
+          "type": "number",
+          "default": 0
+        },
+        "B_negative": {
+          "type": "number",
+          "default": 0
+        },
+        "AB_positive": {
+          "type": "number",
+          "default": 0
+        },
+        "AB_negative": {
+          "type": "number",
+          "default": 0
+        },
+        "O_positive": {
+          "type": "number",
+          "default": 0
+        },
+        "O_negative": {
+          "type": "number",
+          "default": 0
+        }
+      }
+    },
+    "operating_hours": {
+      "type": "string"
+    },
+    "is_24_hour": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "name",
+    "district",
+    "phone"
+  ],
+  "access_rules": {
+    "read": "all",
+    "write": "role:admin"
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

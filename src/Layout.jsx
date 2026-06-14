@@ -126,7 +126,7 @@ const insightsTools = [
 // Pages that manage their own nav (TopNav + BottomNav) — skip sidebar layout
 const STANDALONE_PAGES = new Set([
   'SBLanding', 'SBDashboard', 'SBDoctors', 'SBDoctorProfile',
-  'SBAIDoctor', 'SBMedicine', 'SBEmergency', 'SBProfile', 'SBVault',
+  'SBAIDoctor', 'SBMedicine', 'SBEmergency', 'SBProfile', 'SBVault', 'SymptomTracker',
 ]);
 
 // Standalone wrapper — no sidebar, no layout chrome

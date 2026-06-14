@@ -1,0 +1,251 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "user_type": {
+      "type": "string",
+      "enum": [
+        "patient",
+        "doctor",
+        "hospital_admin"
+      ],
+      "default": "patient"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "date_of_birth": {
+      "type": "string",
+      "format": "date"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female",
+        "other"
+      ]
+    },
+    "blood_group": {
+      "type": "string",
+      "enum": [
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",
+        "O-"
+      ]
+    },
+    "address": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "emergency_contact_name": {
+      "type": "string"
+    },
+    "emergency_contact_phone": {
+      "type": "string"
+    },
+    "medical_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "medications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "allergies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "family_medical_history": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "lifestyle_habits": {
+      "type": "object",
+      "properties": {
+        "smoking": {
+          "type": "string",
+          "enum": [
+            "never",
+            "former",
+            "current"
+          ]
+        },
+        "alcohol": {
+          "type": "string",
+          "enum": [
+            "never",
+            "occasional",
+            "regular"
+          ]
+        },
+        "exercise_frequency": {
+          "type": "string",
+          "enum": [
+            "never",
+            "1-2_weekly",
+            "3-5_weekly",
+            "daily"
+          ]
+        }
+      }
+    },
+    "dietary_preferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "doctor_specializations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Multiple specializations for doctors",
+      "default": []
+    },
+    "doctor_license_number": {
+      "type": "string"
+    },
+    "hospital_name": {
+      "type": "string"
+    },
+    "years_experience": {
+      "type": "number"
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Educational qualifications",
+      "default": []
+    },
+    "languages_spoken": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Languages the doctor can speak",
+      "default": [
+        "Bengali",
+        "English"
+      ]
+    },
+    "clinic_addresses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "district": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          }
+        }
+      },
+      "default": []
+    },
+    "appointment_slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string"
+          },
+          "end_time": {
+            "type": "string"
+          },
+          "clinic_name": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Available appointment slots",
+      "default": []
+    },
+    "consultation_fee": {
+      "type": "number",
+      "description": "Consultation fee in BDT"
+    },
+    "verification_certificates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "URLs of uploaded verification documents",
+      "default": []
+    },
+    "preferred_language": {
+      "type": "string",
+      "enum": [
+        "bengali",
+        "english",
+        "both"
+      ],
+      "default": "bengali"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "unverified",
+        "pending",
+        "verified",
+        "rejected"
+      ],
+      "default": "unverified"
+    },
+    "doctor_specialization": {
+      "type": "string",
+      "description": "Deprecated: Use doctor_specializations array instead"
+    }
+  },
+  "required": [
+    "phone",
+    "date_of_birth",
+    "gender",
+    "blood_group",
+    "address",
+    "district",
+    "emergency_contact_name",
+    "emergency_contact_phone",
+    "lifestyle_habits"
+  ]
+}

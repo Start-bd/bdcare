@@ -1,0 +1,181 @@
+{
+  "name": "MedicalRecord",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Owner of the medical record"
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "lab_report",
+        "prescription",
+        "imaging",
+        "diagnosis",
+        "vaccination",
+        "hospital_discharge",
+        "other"
+      ],
+      "description": "Type of medical record"
+    },
+    "document_url": {
+      "type": "string",
+      "description": "URL to uploaded document (PDF/Image)"
+    },
+    "document_name": {
+      "type": "string",
+      "description": "Original filename"
+    },
+    "record_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the medical record/report"
+    },
+    "extracted_data": {
+      "type": "object",
+      "properties": {
+        "diagnoses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "medications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "dosage": {
+                "type": "string"
+              },
+              "frequency": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "test_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "test_name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "reference_range": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "normal",
+                  "abnormal",
+                  "critical"
+                ]
+              }
+            }
+          }
+        },
+        "doctor_name": {
+          "type": "string"
+        },
+        "hospital_name": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for easy categorization"
+    },
+    "notes": {
+      "type": "string",
+      "description": "User's personal notes"
+    },
+    "shared_with_doctors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of doctor user IDs this record is shared with",
+      "default": []
+    }
+  },
+  "required": [
+    "user_id",
+    "record_type",
+    "document_url"
+  ],
+  "access_rules": {
+    "read": "owner",
+    "write": "owner"
+  },
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "data.shared_with_doctors": {
+            "$contains": "{{user.id}}"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "name": "ForumPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "general_health",
+        "dengue_fever",
+        "diabetes",
+        "heart_disease",
+        "maternal_health",
+        "child_health",
+        "mental_health",
+        "emergency_medicine",
+        "research",
+        "other"
+      ]
+    },
+    "author_type": {
+      "type": "string",
+      "enum": [
+        "doctor",
+        "patient",
+        "researcher"
+      ]
+    },
+    "is_professional_only": {
+      "type": "boolean",
+      "default": false
+    },
+    "likes_count": {
+      "type": "number",
+      "default": 0
+    },
+    "replies_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "category"
+  ],
+  "access_rules": {
+    "read": "all",
+    "write": "authenticated"
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$ne": "guest"
+        }
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.is_professional_only": false
+        },
+        {
+          "user_condition": {
+            "role": "doctor"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

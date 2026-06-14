@@ -1,0 +1,96 @@
+{
+  "name": "MedicineOrder",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "items_json": {
+      "type": "string"
+    },
+    "prescription_url": {
+      "type": "string"
+    },
+    "total_amount": {
+      "type": "number"
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "bkash",
+        "nagad",
+        "card",
+        "cod"
+      ]
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending_verification",
+        "paid",
+        "refunded"
+      ],
+      "default": "pending_verification"
+    },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "confirmed",
+        "dispatched",
+        "delivered",
+        "cancelled"
+      ],
+      "default": "pending"
+    }
+  },
+  "required": [
+    "user_id",
+    "total_amount"
+  ],
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

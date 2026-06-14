@@ -1,0 +1,152 @@
+{
+  "name": "UserPreferences",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to the user"
+    },
+    "notification_preferences": {
+      "type": "object",
+      "properties": {
+        "email_notifications": {
+          "type": "boolean",
+          "default": true
+        },
+        "appointment_reminders": {
+          "type": "boolean",
+          "default": true
+        },
+        "health_tips": {
+          "type": "boolean",
+          "default": true
+        },
+        "forum_replies": {
+          "type": "boolean",
+          "default": true
+        },
+        "emergency_alerts": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "privacy_settings": {
+      "type": "object",
+      "properties": {
+        "allow_anonymous_data_usage": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow anonymized data for public health research"
+        },
+        "share_location_for_emergency": {
+          "type": "boolean",
+          "default": true
+        },
+        "allow_ai_learning_from_conversations": {
+          "type": "boolean",
+          "default": false
+        },
+        "profile_visibility": {
+          "type": "string",
+          "enum": [
+            "private",
+            "doctors_only",
+            "public"
+          ],
+          "default": "private"
+        }
+      }
+    },
+    "accessibility_settings": {
+      "type": "object",
+      "properties": {
+        "font_size": {
+          "type": "string",
+          "enum": [
+            "small",
+            "normal",
+            "large",
+            "extra_large"
+          ],
+          "default": "normal"
+        },
+        "high_contrast": {
+          "type": "boolean",
+          "default": false
+        },
+        "reduce_animations": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "theme_settings": {
+      "type": "object",
+      "properties": {
+        "color_scheme": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "default": "light"
+        },
+        "compact_mode": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "access_rules": {
+    "read": "owner",
+    "write": "owner"
+  },
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

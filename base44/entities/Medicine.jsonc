@@ -1,0 +1,65 @@
+{
+  "name": "Medicine",
+  "type": "object",
+  "properties": {
+    "name_en": {
+      "type": "string"
+    },
+    "name_bn": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "painkiller",
+        "antibiotic",
+        "antidiabetic",
+        "vitamin",
+        "antacid",
+        "antihypertensive",
+        "antihistamine",
+        "oral_saline",
+        "antifungal",
+        "other"
+      ]
+    },
+    "dosage": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "in_stock": {
+      "type": "boolean",
+      "default": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name_en",
+    "price"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

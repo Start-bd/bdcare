@@ -1,0 +1,86 @@
+{
+  "name": "UserActivityLog",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Reference to the user"
+    },
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "login",
+        "profile_update",
+        "ai_consultation",
+        "emergency_request",
+        "appointment_booking",
+        "forum_post",
+        "medicine_check",
+        "skin_check",
+        "data_export",
+        "privacy_setting_change"
+      ],
+      "description": "Type of user activity"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human readable description of the activity"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP address from where activity occurred"
+    },
+    "device_info": {
+      "type": "string",
+      "description": "Basic device/browser information"
+    },
+    "success": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the activity was successful"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional activity specific data"
+    }
+  },
+  "required": [
+    "user_id",
+    "activity_type",
+    "description"
+  ],
+  "access_rules": {
+    "read": [
+      "owner",
+      "role:admin"
+    ],
+    "write": "owner"
+  },
+  "rls": {
+    "create": {
+      "data.user_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

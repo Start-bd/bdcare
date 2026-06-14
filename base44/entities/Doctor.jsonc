@@ -1,0 +1,74 @@
+{
+  "name": "Doctor",
+  "type": "object",
+  "properties": {
+    "name_bn": {
+      "type": "string",
+      "description": "Doctor name in Bengali"
+    },
+    "name_en": {
+      "type": "string",
+      "description": "Doctor name in English"
+    },
+    "specialty": {
+      "type": "string",
+      "enum": [
+        "general",
+        "cardiology",
+        "pediatrics",
+        "dermatology",
+        "orthopedics",
+        "psychiatry",
+        "gynecology",
+        "neurology",
+        "diabetes",
+        "eye"
+      ]
+    },
+    "qualifications": {
+      "type": "string"
+    },
+    "hospital": {
+      "type": "string"
+    },
+    "experience_years": {
+      "type": "number"
+    },
+    "patient_count": {
+      "type": "number"
+    },
+    "rating": {
+      "type": "number"
+    },
+    "consultation_fee_video": {
+      "type": "number"
+    },
+    "consultation_fee_audio": {
+      "type": "number"
+    },
+    "consultation_fee_inperson": {
+      "type": "number"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_female": {
+      "type": "boolean",
+      "default": false
+    },
+    "bio": {
+      "type": "string"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name_en",
+    "specialty"
+  ]
+}

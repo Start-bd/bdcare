@@ -1,0 +1,122 @@
+{
+  "name": "Hospital",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Hospital name"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "government",
+        "private",
+        "specialized"
+      ],
+      "description": "Hospital type"
+    },
+    "district": {
+      "type": "string",
+      "description": "District location"
+    },
+    "upazila": {
+      "type": "string",
+      "description": "Upazila location"
+    },
+    "address": {
+      "type": "string",
+      "description": "Full address"
+    },
+    "latitude": {
+      "type": "number",
+      "description": "GPS latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "description": "GPS longitude"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "emergency_phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "total_beds": {
+      "type": "number"
+    },
+    "available_beds": {
+      "type": "number"
+    },
+    "specializations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Medical specializations available"
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Services provided"
+    },
+    "has_emergency": {
+      "type": "boolean",
+      "default": false
+    },
+    "has_ambulance": {
+      "type": "boolean",
+      "default": false
+    },
+    "has_blood_bank": {
+      "type": "boolean",
+      "default": false
+    },
+    "operating_hours": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "review_count": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "name",
+    "district",
+    "address"
+  ],
+  "access_rules": {
+    "read": "all",
+    "write": "role:admin"
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

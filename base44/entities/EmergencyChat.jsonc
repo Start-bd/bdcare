@@ -1,0 +1,143 @@
+{
+  "name": "EmergencyChat",
+  "type": "object",
+  "properties": {
+    "emergency_request_id": {
+      "type": "string",
+      "description": "Reference to the emergency request"
+    },
+    "sender_id": {
+      "type": "string"
+    },
+    "sender_name": {
+      "type": "string"
+    },
+    "sender_type": {
+      "type": "string",
+      "enum": [
+        "patient",
+        "doctor",
+        "paramedic",
+        "dispatcher",
+        "family"
+      ]
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "image",
+        "location",
+        "vital_signs",
+        "voice_note"
+      ],
+      "default": "text"
+    },
+    "content": {
+      "type": "string",
+      "description": "Message content or file URL"
+    },
+    "location_data": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "accuracy": {
+          "type": "number"
+        }
+      }
+    },
+    "is_urgent": {
+      "type": "boolean",
+      "default": false
+    },
+    "read_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of user IDs who have read this message"
+    }
+  },
+  "required": [
+    "emergency_request_id",
+    "sender_id",
+    "content"
+  ],
+  "access_rules": {
+    "read": [
+      "owner",
+      "role:admin",
+      "role:doctor"
+    ],
+    "write": [
+      "owner",
+      "role:admin",
+      "role:doctor"
+    ]
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$ne": "guest"
+        }
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.sender_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "doctor"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.sender_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "doctor"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.sender_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "doctor"
+          }
+        }
+      ]
+    }
+  }
+}

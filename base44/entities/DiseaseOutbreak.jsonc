@@ -1,0 +1,102 @@
+{
+  "name": "DiseaseOutbreak",
+  "type": "object",
+  "properties": {
+    "disease_name": {
+      "type": "string",
+      "description": "Name of the disease"
+    },
+    "district": {
+      "type": "string",
+      "description": "Affected district"
+    },
+    "upazila": {
+      "type": "string",
+      "description": "Affected upazila"
+    },
+    "alert_level": {
+      "type": "string",
+      "enum": [
+        "watch",
+        "advisory",
+        "warning",
+        "emergency"
+      ],
+      "description": "Alert severity level"
+    },
+    "case_count": {
+      "type": "number",
+      "description": "Number of reported cases"
+    },
+    "affected_population": {
+      "type": "number",
+      "description": "Population at risk"
+    },
+    "symptoms_pattern": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Common symptoms reported"
+    },
+    "prevention_measures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Recommended prevention steps"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "contained",
+        "resolved"
+      ],
+      "default": "active"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "ai_detection",
+        "manual_report",
+        "government_data"
+      ],
+      "description": "How the outbreak was detected"
+    },
+    "confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "AI confidence in outbreak detection"
+    }
+  },
+  "required": [
+    "disease_name",
+    "district",
+    "alert_level",
+    "case_count"
+  ],
+  "access_rules": {
+    "read": "all",
+    "write": "role:admin"
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "name": "DoctorReview",
+  "type": "object",
+  "properties": {
+    "doctor_id": {
+      "type": "string",
+      "description": "ID of the doctor being reviewed"
+    },
+    "patient_id": {
+      "type": "string",
+      "description": "ID of the patient who wrote the review"
+    },
+    "patient_name": {
+      "type": "string",
+      "description": "Name of the patient"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Rating out of 5"
+    },
+    "review_text": {
+      "type": "string",
+      "description": "Review content"
+    },
+    "visit_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the visit"
+    },
+    "appointment_id": {
+      "type": "string",
+      "description": "Related appointment ID"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the review is from a verified appointment"
+    }
+  },
+  "required": [
+    "doctor_id",
+    "patient_id",
+    "rating",
+    "review_text"
+  ],
+  "access_rules": {
+    "read": "all",
+    "write": "authenticated"
+  },
+  "rls": {
+    "create": {
+      "data.patient_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {},
+    "update": {
+      "data.patient_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "data.patient_id": "{{user.id}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

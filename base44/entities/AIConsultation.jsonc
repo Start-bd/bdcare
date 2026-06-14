@@ -1,0 +1,98 @@
+{
+  "name": "AIConsultation",
+  "type": "object",
+  "properties": {
+    "user_message": {
+      "type": "string"
+    },
+    "ai_response": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "bengali",
+        "english"
+      ]
+    },
+    "symptoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "severity_assessment": {
+      "type": "string",
+      "enum": [
+        "routine",
+        "monitor",
+        "see_doctor",
+        "urgent"
+      ]
+    },
+    "follow_up_needed": {
+      "type": "boolean",
+      "default": false
+    },
+    "session_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_message",
+    "ai_response",
+    "language"
+  ],
+  "access_rules": {
+    "read": "owner",
+    "write": "owner"
+  },
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "created_by": "{{user.email}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "created_by": "{{user.email}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "created_by": "{{user.email}}",
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

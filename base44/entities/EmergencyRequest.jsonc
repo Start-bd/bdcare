@@ -1,0 +1,144 @@
+{
+  "name": "EmergencyRequest",
+  "type": "object",
+  "properties": {
+    "patient_name": {
+      "type": "string"
+    },
+    "patient_phone": {
+      "type": "string"
+    },
+    "emergency_type": {
+      "type": "string",
+      "enum": [
+        "medical",
+        "accident",
+        "cardiac",
+        "breathing",
+        "bleeding",
+        "other"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "high"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of emergency"
+    },
+    "location": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "dispatched",
+        "arrived",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending"
+    },
+    "ambulance_assigned": {
+      "type": "string"
+    },
+    "hospital_assigned": {
+      "type": "string"
+    },
+    "estimated_arrival": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "patient_name",
+    "patient_phone",
+    "emergency_type",
+    "location"
+  ],
+  "access_rules": {
+    "read": [
+      "owner",
+      "role:admin",
+      "role:doctor"
+    ],
+    "write": [
+      "authenticated",
+      "role:admin"
+    ]
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$ne": "guest"
+        }
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.ambulance_assigned": "{{user.id}}"
+        },
+        {
+          "data.hospital_assigned": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "data.ambulance_assigned": "{{user.id}}"
+        },
+        {
+          "data.hospital_assigned": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

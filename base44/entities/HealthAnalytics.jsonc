@@ -1,0 +1,118 @@
+{
+  "name": "HealthAnalytics",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "User ID for personal analytics"
+    },
+    "data_type": {
+      "type": "string",
+      "enum": [
+        "symptom_report",
+        "ai_consultation",
+        "emergency_request",
+        "hospital_visit",
+        "medication_tracking",
+        "vital_signs"
+      ],
+      "description": "Type of health data"
+    },
+    "district": {
+      "type": "string",
+      "description": "Geographic location for regional analysis"
+    },
+    "symptoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Reported symptoms"
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Health conditions mentioned"
+    },
+    "severity_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "description": "Severity assessment"
+    },
+    "age_group": {
+      "type": "string",
+      "enum": [
+        "0-17",
+        "18-35",
+        "36-55",
+        "56-70",
+        "70+"
+      ],
+      "description": "Age demographic"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female",
+        "other"
+      ]
+    },
+    "seasonal_factor": {
+      "type": "string",
+      "enum": [
+        "winter",
+        "summer",
+        "monsoon",
+        "post_monsoon"
+      ],
+      "description": "Seasonal context for health data"
+    },
+    "data_value": {
+      "type": "object",
+      "description": "Flexible data storage for various health metrics"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether data is anonymized for public health analysis"
+    }
+  },
+  "required": [
+    "data_type",
+    "district"
+  ],
+  "access_rules": {
+    "read": "role:admin",
+    "write": "role:admin"
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

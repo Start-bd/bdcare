@@ -13,7 +13,7 @@ function SymptomTrackerContent() {
     const [user, setUser] = useState(null);
     const [logs, setLogs] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [tab, setTab] = useState('log'); // log | chart | history
+    const [tab, setTab] = useState('chart'); // log | chart | history
     const [todayLog, setTodayLog] = useState(null);
 
     const today = new Date().toISOString().split('T')[0];

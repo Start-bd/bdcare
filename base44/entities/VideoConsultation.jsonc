@@ -1,0 +1,136 @@
+{
+  "name": "VideoConsultation",
+  "type": "object",
+  "properties": {
+    "patient_id": {
+      "type": "string"
+    },
+    "doctor_id": {
+      "type": "string"
+    },
+    "appointment_id": {
+      "type": "string",
+      "description": "Reference to appointment if scheduled"
+    },
+    "emergency_request_id": {
+      "type": "string",
+      "description": "If this is an emergency consultation"
+    },
+    "consultation_type": {
+      "type": "string",
+      "enum": [
+        "emergency",
+        "routine",
+        "follow_up"
+      ],
+      "default": "routine"
+    },
+    "scheduled_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_start_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actual_end_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "session_status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "in_progress",
+        "completed",
+        "cancelled"
+      ],
+      "default": "scheduled"
+    },
+    "consultation_notes": {
+      "type": "string"
+    },
+    "prescription": {
+      "type": "string"
+    },
+    "follow_up_required": {
+      "type": "boolean",
+      "default": false
+    },
+    "recording_url": {
+      "type": "string",
+      "description": "URL to consultation recording (if permitted)"
+    }
+  },
+  "required": [
+    "patient_id",
+    "doctor_id",
+    "consultation_type"
+  ],
+  "access_rules": {
+    "read": [
+      "owner",
+      "role:doctor",
+      "role:admin"
+    ],
+    "write": [
+      "owner",
+      "role:doctor",
+      "role:admin"
+    ]
+  },
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": {
+          "$ne": "guest"
+        }
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "data.patient_id": "{{user.id}}"
+        },
+        {
+          "data.doctor_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.patient_id": "{{user.id}}"
+        },
+        {
+          "data.doctor_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.patient_id": "{{user.id}}"
+        },
+        {
+          "data.doctor_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
