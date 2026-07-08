@@ -5,6 +5,8 @@ import { base44 } from '@/api/base44Client';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
+import FloatingIcon from '../components/sb/FloatingIcon';
+import AIOrb from '../components/sb/AIOrb';
 import DoctorCard from '../components/sb/DoctorCard';
 import { Search, Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot, Video, Calendar, ChevronRight, Zap, Activity } from 'lucide-react';
 
@@ -65,8 +67,9 @@ function DashboardContent() {
                 </div>
 
                 {/* Instant Consult Banner */}
-                <div className="green-gradient rounded-[14px] p-5 text-white flex items-center justify-between">
-                    <div>
+                <div className="green-gradient rounded-[14px] p-5 text-white flex items-center justify-between relative overflow-hidden fade-rise">
+                    <div className="absolute -right-6 -top-6 w-28 h-28 bg-teal-300/20 rounded-full blur-2xl" />
+                    <div className="relative">
                         <div className="flex items-center gap-2 mb-1">
                             <Zap className="w-4 h-4 text-yellow-300" />
                             <span className="text-xs font-semibold text-yellow-200">{isBn ? 'তাৎক্ষণিক সেবা' : 'Instant Service'}</span>
@@ -74,9 +77,12 @@ function DashboardContent() {
                         <h3 className="font-bold text-lg leading-tight">{isBn ? '২ মিনিটে ডাক্তার পান' : 'Get Doctor in 2 Minutes'}</h3>
                         <p className="text-sm text-white/80 mt-0.5">{isBn ? 'অনলাইন ডাক্তার এখনই উপলব্ধ' : 'Online doctors available now'}</p>
                     </div>
-                    <Link to={createPageUrl('SBDoctors')} className="bg-white text-[#0F6E56] font-bold px-4 py-2 rounded-[10px] text-sm flex-shrink-0 hover:bg-[#eefaf5]">
-                        {isBn ? 'শুরু করুন' : 'Start'}
-                    </Link>
+                    <div className="relative flex items-center gap-3">
+                        <AIOrb size="md" isBn={isBn} label={isBn ? 'AI ডাক্তার' : 'AI Doctor'} />
+                        <Link to={createPageUrl('SBDoctors')} className="bg-white text-[#0F6E56] font-bold px-4 py-2 rounded-[10px] text-sm flex-shrink-0 hover:bg-[#eefaf5]">
+                            {isBn ? 'শুরু করুন' : 'Start'}
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Services grid */}
@@ -84,10 +90,8 @@ function DashboardContent() {
                     <h2 className="font-bold text-gray-900 mb-3">{isBn ? 'সেবাসমূহ' : 'Services'}</h2>
                     <div className="grid grid-cols-4 gap-3">
                         {services.map((s, i) => (
-                            <Link key={i} to={createPageUrl(s.page)} className="flex flex-col items-center gap-1.5 p-3 bg-white rounded-[14px] border border-[#e0e8e4] hover:border-[#0F6E56]/30 transition-colors">
-                                <div className={`w-10 h-10 rounded-xl ${s.color} flex items-center justify-center`}>
-                                    <s.icon className="w-5 h-5" />
-                                </div>
+                            <Link key={i} to={createPageUrl(s.page)} className="flex flex-col items-center gap-1.5 p-3 bg-white rounded-[14px] border border-[#e0e8e4] hover:border-[#0F6E56]/30 transition-colors fade-rise" style={{ animationDelay: `${i * 0.04}s` }}>
+                                <FloatingIcon Icon={s.icon} color={s.color} size="sm" delay={i * 150} />
                                 <span className="text-[10px] font-medium text-gray-600 text-center leading-tight">{isBn ? s.bn : s.en}</span>
                             </Link>
                         ))}
@@ -115,13 +119,13 @@ function DashboardContent() {
 
                 {/* Quick links */}
                 <div className="grid grid-cols-2 gap-3">
-                    <Link to={createPageUrl('SBEmergency')} className="card-sb p-4 text-center border-red-200 hover:bg-red-50 transition-colors">
-                        <PhoneCall className="w-6 h-6 text-red-500 mx-auto mb-1" />
+                    <Link to={createPageUrl('SBEmergency')} className="card-sb card-3d p-4 text-center border-red-200 hover:bg-red-50 transition-colors">
+                        <FloatingIcon Icon={PhoneCall} color="bg-red-100 text-red-500" size="md" float={false} className="mx-auto mb-1" />
                         <p className="text-sm font-semibold text-red-600">{isBn ? 'জরুরি সেবা' : 'Emergency'}</p>
                         <p className="text-xs text-gray-500">999 / 16789</p>
                     </Link>
-                    <Link to={createPageUrl('SBAIDoctor')} className="card-sb p-4 text-center hover:bg-teal-50 transition-colors">
-                        <Bot className="w-6 h-6 text-teal-600 mx-auto mb-1" />
+                    <Link to={createPageUrl('SBAIDoctor')} className="card-sb card-3d p-4 text-center hover:bg-teal-50 transition-colors">
+                        <FloatingIcon Icon={Bot} color="bg-teal-100 text-teal-600" size="md" float={false} className="mx-auto mb-1" />
                         <p className="text-sm font-semibold text-teal-700">{isBn ? 'AI ডাক্তার' : 'AI Doctor'}</p>
                         <p className="text-xs text-gray-500">{isBn ? 'বিনামূল্যে' : 'Free'}</p>
                     </Link>

@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
+import FloatingIcon from '../components/sb/FloatingIcon';
 import { base44 } from '@/api/base44Client';
 import { User, Calendar, Shield, Pill, CreditCard, Globe, Bell, LogOut, ChevronRight, Edit2, Check, X } from 'lucide-react';
 
@@ -135,7 +136,7 @@ function ProfileContent() {
                         <button key={i} onClick={item.action}
                             className="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-[#f8faf9] transition-colors border-b border-[#e0e8e4] last:border-0 text-left"
                         >
-                            <item.icon className="w-5 h-5 text-[#0F6E56] flex-shrink-0" />
+                            <FloatingIcon Icon={item.icon} color="bg-emerald-50 text-[#0F6E56]" size="sm" float={false} />
                             <span className="flex-1 text-sm font-medium text-gray-700">{isBn ? item.labelBn : item.labelEn}</span>
                             <ChevronRight className="w-4 h-4 text-gray-400" />
                         </button>

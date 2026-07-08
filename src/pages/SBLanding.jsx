@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import LangToggle from '../components/sb/LangToggle';
+import FloatingIcon from '../components/sb/FloatingIcon';
+import AIOrb from '../components/sb/AIOrb';
 import GlobalSEO from '../components/seo/GlobalSEO';
 import {
     Stethoscope, Pill, FlaskConical, Heart, PhoneCall, Home, Shield, Bot,
@@ -70,20 +72,25 @@ function LandingContent() {
             </header>
 
             {/* Hero */}
-            <section className="green-gradient text-white py-16 px-4">
-                <div className="max-w-3xl mx-auto text-center">
-                    <div className="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4">
+            <section className="green-gradient text-white py-16 px-4 relative overflow-hidden">
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
+                <div className="absolute -bottom-16 -left-10 w-56 h-56 bg-teal-300/20 rounded-full blur-3xl" />
+                <div className="max-w-3xl mx-auto text-center relative">
+                    <div className="flex justify-center mb-6 fade-rise">
+                        <AIOrb size="lg" asLink={false} isBn={isBn} label={isBn ? 'AI সহায়ক' : 'AI Assistant'} />
+                    </div>
+                    <div className="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 fade-rise" style={{ animationDelay: '0.1s' }}>
                         🇧🇩 বাংলাদেশের প্রথম AI স্বাস্থ্য সহায়ক
                     </div>
-                    <h1 className="text-3xl md:text-5xl font-bold mb-3 leading-tight">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-3 leading-tight fade-rise" style={{ animationDelay: '0.15s' }}>
                         আপনার স্বাস্থ্য বন্ধু
                     </h1>
-                    <p className="text-lg md:text-xl text-white/90 mb-2">
+                    <p className="text-lg md:text-xl text-white/90 mb-2 fade-rise" style={{ animationDelay: '0.2s' }}>
                         {isBn ? 'যেকোনো সময়, যেকোনো জায়গা থেকে বিশেষজ্ঞ ডাক্তারের পরামর্শ নিন' : 'Get expert doctor consultation anytime, anywhere in Bangladesh'}
                     </p>
-                    <p className="text-sm text-white/70 mb-8">Shasthya Bondhu · bdcare.app</p>
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                        <Link to={createPageUrl('SBDashboard')} className="bg-white text-[#0F6E56] font-bold px-8 py-3 rounded-[10px] text-base hover:bg-[#eefaf5] transition-colors">
+                    <p className="text-sm text-white/70 mb-8 fade-rise" style={{ animationDelay: '0.25s' }}>Shasthya Bondhu · bdcare.app</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center fade-rise" style={{ animationDelay: '0.3s' }}>
+                        <Link to={createPageUrl('SBDashboard')} className="bg-white text-[#0F6E56] font-bold px-8 py-3 rounded-[10px] text-base hover:bg-[#eefaf5] transition-colors shadow-lg">
                             {isBn ? 'শুরু করুন' : 'Get Started'}
                         </Link>
                         <a href="#services" className="border-2 border-white text-white font-bold px-8 py-3 rounded-[10px] text-base hover:bg-white/10 transition-colors">
@@ -112,10 +119,8 @@ function LandingContent() {
                     <p className="text-gray-500 text-center text-sm mb-8">{isBn ? 'আপনার স্বাস্থ্য সেবার সমাধান এক জায়গায়' : 'All your healthcare needs in one place'}</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         {services.map((s, i) => (
-                            <Link key={i} to={createPageUrl(s.page)} className="card-sb p-4 flex flex-col items-center gap-2 hover:shadow-md transition-shadow text-center">
-                                <div className={`w-12 h-12 rounded-2xl ${s.color} flex items-center justify-center`}>
-                                    <s.icon className="w-6 h-6" />
-                                </div>
+                            <Link key={i} to={createPageUrl(s.page)} className="card-sb card-3d p-4 flex flex-col items-center gap-2 text-center fade-rise" style={{ animationDelay: `${i * 0.05}s` }}>
+                                <FloatingIcon Icon={s.icon} color={s.color} size="md" delay={i * 200} />
                                 <span className="text-xs font-semibold text-gray-700">{isBn ? s.bn : s.en}</span>
                             </Link>
                         ))}
@@ -129,8 +134,8 @@ function LandingContent() {
                     <h2 className="text-xl font-bold text-gray-900 text-center mb-8">{isBn ? 'কিভাবে কাজ করে' : 'How It Works'}</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         {steps.map((s, i) => (
-                            <div key={i} className="text-center">
-                                <div className="w-12 h-12 green-gradient rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-3">
+                            <div key={i} className="text-center fade-rise" style={{ animationDelay: `${i * 0.1}s` }}>
+                                <div className="w-14 h-14 green-gradient rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-3 shadow-lg" style={{ animation: `float-y 4s ease-in-out infinite`, animationDelay: `${i * 0.4}s` }}>
                                     {isBn ? s.num : s.numEn}
                                 </div>
                                 <h3 className="font-bold text-gray-900 mb-1">{isBn ? s.titleBn : s.titleEn}</h3>
@@ -152,9 +157,9 @@ function LandingContent() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         {sampleDoctors.map((d, i) => (
-                            <div key={i} className="card-sb p-4">
+                            <div key={i} className="card-sb card-3d p-4 fade-rise" style={{ animationDelay: `${i * 0.08}s` }}>
                                 <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-12 h-12 rounded-full green-gradient flex items-center justify-center text-white font-bold text-lg">
+                                    <div className="w-12 h-12 rounded-full green-gradient flex items-center justify-center text-white font-bold text-lg shadow-md">
                                         {(isBn ? d.name_bn : d.name_en).charAt(0)}
                                     </div>
                                     <div>

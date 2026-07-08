@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useLang } from './LanguageContext';
+import FloatingIcon from './FloatingIcon';
 import { Home, Stethoscope, Bot, Pill, User } from 'lucide-react';
 
 const navItems = [
@@ -23,8 +24,13 @@ export default function BottomNav() {
                     const href = createPageUrl(item.page);
                     const active = location.pathname === href || location.pathname.startsWith(href + '/');
                     return (
-                        <Link key={item.page} to={href} className="flex flex-col items-center gap-0.5 min-w-0 px-2 py-1">
-                            <item.icon className={`w-5 h-5 ${active ? 'text-[#0F6E56]' : 'text-gray-400'}`} />
+                        <Link key={item.page} to={href} className="flex flex-col items-center gap-0.5 min-w-0 px-2 py-1 group">
+                            <FloatingIcon
+                                Icon={item.icon}
+                                color={active ? 'bg-emerald-100 text-emerald-600' : 'bg-gray-100 text-gray-400'}
+                                size="sm"
+                                float={false}
+                            />
                             <span className={`text-[10px] font-medium truncate ${active ? 'text-[#0F6E56]' : 'text-gray-400'}`}>
                                 {isBn ? item.labelBn : item.labelEn}
                             </span>

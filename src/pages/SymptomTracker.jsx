@@ -6,6 +6,7 @@ import BottomNav from '../components/sb/BottomNav';
 import SymptomLogForm from '../components/symptoms/SymptomLogForm';
 import SymptomTrendChart from '../components/symptoms/SymptomTrendChart';
 import SymptomHistory from '../components/symptoms/SymptomHistory';
+import FloatingIcon from '../components/sb/FloatingIcon';
 import { Activity, Plus, BarChart2, List } from 'lucide-react';
 
 function SymptomTrackerContent() {
@@ -78,10 +79,8 @@ function SymptomTrackerContent() {
 
             <div className="max-w-2xl mx-auto px-4 pt-6">
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
-                        <Activity className="w-5 h-5 text-purple-600" />
-                    </div>
+                <div className="flex items-center gap-3 mb-5 fade-rise">
+                    <FloatingIcon Icon={Activity} color="bg-purple-100 text-purple-600" size="md" />
                     <div>
                         <h1 className="text-xl font-bold text-gray-900">{isBn ? 'লক্ষণ ট্র্যাকার' : 'Symptom Tracker'}</h1>
                         <p className="text-xs text-gray-500">{isBn ? 'আপনার স্বাস্থ্যের প্যাটার্ন বুঝুন' : 'Understand your health patterns'}</p>

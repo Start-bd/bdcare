@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
+import FloatingIcon from '../components/sb/FloatingIcon';
 import { base44 } from '@/api/base44Client';
 import { Upload, Shield, FileText, FlaskConical, Image, Syringe, File, Share2, Trash2, Link2, X } from 'lucide-react';
 
@@ -108,10 +109,8 @@ function VaultContent() {
                         {filteredRecords.map(rec => {
                             const t = RECORD_TYPES.find(rt => rt.key === rec.record_type) || RECORD_TYPES[4];
                             return (
-                                <div key={rec.id} className="card-sb p-4 flex items-center gap-3">
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${t.color}`}>
-                                        <t.icon className="w-5 h-5" />
-                                    </div>
+                                <div key={rec.id} className="card-sb card-3d p-4 flex items-center gap-3">
+                                    <FloatingIcon Icon={t.icon} color={t.color} size="sm" float={false} />
                                     <div className="flex-1 min-w-0">
                                         <p className="font-semibold text-sm text-gray-900">{isBn ? t.labelBn : t.labelEn}</p>
                                         {rec.doctor_name && <p className="text-xs text-gray-500">{rec.doctor_name}</p>}

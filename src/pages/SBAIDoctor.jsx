@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { LanguageProvider, useLang } from '../components/sb/LanguageContext';
 import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
+import AIOrb from '../components/sb/AIOrb';
 import { base44 } from '@/api/base44Client';
 import { Send, Bot, User, Loader2, Stethoscope } from 'lucide-react';
 
@@ -94,9 +95,7 @@ Respond as the AI Doctor in a caring, helpful manner.`,
 
             {/* Chat header */}
             <div className="bg-white border-b border-[#e0e8e4] px-4 py-3 flex items-center gap-3">
-                <div className="w-10 h-10 green-gradient rounded-full flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-white" />
-                </div>
+                <AIOrb size="md" asLink={false} isBn={isBn} label={isBn ? 'AI সহায়ক' : 'AI Assistant'} />
                 <div>
                     <p className="font-bold text-gray-900 text-sm">{isBn ? 'AI স্বাস্থ্য সহায়ক' : 'AI Health Assistant'}</p>
                     <p className="text-xs text-green-500 flex items-center gap-1">

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { useLang } from './LanguageContext';
 import LangToggle from './LangToggle';
+import AIOrb from './AIOrb';
 import { Bell, PhoneCall } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 
@@ -27,7 +28,9 @@ export default function TopNav({ user }) {
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                     <Link to={createPageUrl('SBDoctors')} className="hover:text-[#0F6E56]">{isBn ? 'ডাক্তার' : 'Doctors'}</Link>
                     <Link to={createPageUrl('SBMedicine')} className="hover:text-[#0F6E56]">{isBn ? 'ওষুধ' : 'Medicine'}</Link>
-                    <Link to={createPageUrl('SBAIDoctor')} className="hover:text-[#0F6E56]">{isBn ? 'AI ডাক্তার' : 'AI Doctor'}</Link>
+                    <Link to={createPageUrl('SBAIDoctor')} className="hover:text-[#0F6E56] flex items-center gap-1.5">
+                        {isBn ? 'AI ডাক্তার' : 'AI Doctor'}
+                    </Link>
                     <Link to={createPageUrl('SBEmergency')} className="text-[#D85A30] font-semibold hover:opacity-80 flex items-center gap-1">
                         <PhoneCall className="w-4 h-4" />
                         {isBn ? 'জরুরি' : 'Emergency'}
@@ -36,6 +39,7 @@ export default function TopNav({ user }) {
 
                 {/* Right actions */}
                 <div className="flex items-center gap-2">
+                    <AIOrb size="sm" isBn={isBn} label={isBn ? 'AI ডাক্তার' : 'AI Doctor'} />
                     <LangToggle />
                     {user ? (
                         <>

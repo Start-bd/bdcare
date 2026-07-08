@@ -59,6 +59,159 @@ body {
 /* Mobile bottom nav safe area */
 .bottom-nav { padding-bottom: env(safe-area-inset-bottom); }
 
+/* ============================================================
+   3D DESIGN SYSTEM — floating icons + animated AI orb
+   ============================================================ */
+
+/* --- 3D Floating Icon --- */
+.floating-icon-3d {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 600px;
+    box-shadow: 0 6px 14px -6px rgba(15, 110, 86, 0.28), 0 2px 4px rgba(0,0,0,0.04);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    will-change: transform;
+}
+.floating-icon-3d .floating-icon-face {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(14px);
+    transition: transform 0.35s ease;
+}
+.floating-icon-3d .floating-icon-svg {
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12));
+}
+.floating-icon-3d .floating-icon-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.55), transparent 60%);
+    opacity: 0.7;
+    pointer-events: none;
+    transform: translateZ(2px);
+}
+.floating-icon-3d:hover {
+    transform: translateY(-4px) rotateX(10deg) rotateY(-10deg) scale(1.06);
+    box-shadow: 0 16px 28px -10px rgba(15, 110, 86, 0.4), 0 4px 8px rgba(0,0,0,0.06);
+}
+.floating-icon-3d:hover .floating-icon-face {
+    transform: translateZ(22px);
+}
+.floating-icon-3d[data-float="on"] {
+    animation: float-y 4s ease-in-out infinite;
+}
+@keyframes float-y {
+    0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+    50% { transform: translateY(-6px) rotateX(4deg) rotateY(-3deg); }
+}
+.floating-icon-3d:hover { animation-play-state: paused; }
+
+/* --- Animated AI Orb --- */
+.ai-orb {
+    position: relative;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 35% 30%, #5eead4 0%, #14b8a6 38%, #0d9488 62%, #0f766e 100%);
+    box-shadow:
+        0 0 0 1px rgba(94, 234, 212, 0.4),
+        0 0 18px 2px rgba(20, 184, 166, 0.45),
+        inset 0 -4px 10px rgba(0,0,0,0.25),
+        inset 0 4px 10px rgba(255,255,255,0.35);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ai-orb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 2px solid rgba(94, 234, 212, 0.55);
+    animation: orb-ring 2.4s ease-out infinite;
+    pointer-events: none;
+}
+@keyframes orb-ring {
+    0% { transform: scale(1); opacity: 0.7; }
+    70% { transform: scale(1.5); opacity: 0; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+.ai-orb-core-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ai-orb-core {
+    border-radius: 9999px;
+    background: radial-gradient(circle, #ffffff 0%, #a7f3d0 60%, transparent 100%);
+    box-shadow: 0 0 12px 4px rgba(167, 243, 208, 0.9);
+    animation: orb-pulse 1.8s ease-in-out infinite;
+}
+@keyframes orb-pulse {
+    0%, 100% { transform: scale(0.7); opacity: 0.85; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+.ai-orb-sparkle {
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    top: 14%;
+    left: 18%;
+    color: #ffffff;
+    opacity: 0.9;
+    animation: orb-sparkle 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+}
+@keyframes orb-sparkle {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.85; }
+    50% { transform: rotate(20deg) scale(1.15); opacity: 1; }
+}
+.ai-orb-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 45%);
+    pointer-events: none;
+}
+.ai-orb:hover {
+    transform: scale(1.08) translateY(-2px);
+}
+.ai-orb:active {
+    transform: scale(0.96);
+}
+
+/* --- 3D card lift utility --- */
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    will-change: transform;
+}
+.card-3d:hover {
+    transform: translateY(-6px) rotateX(4deg);
+    box-shadow: 0 22px 36px -14px rgba(15, 110, 86, 0.32), 0 6px 12px rgba(0,0,0,0.05);
+}
+
+/* --- Entrance animation utility --- */
+.fade-rise {
+    animation: fade-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fade-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .floating-icon-3d, .ai-orb, .ai-orb::after, .ai-orb-core, .ai-orb-sparkle, .fade-rise {
+        animation: none !important;
+    }
+    .floating-icon-3d:hover, .card-3d:hover { transform: none; }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

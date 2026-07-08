@@ -58,10 +58,13 @@ function EmergencyContent() {
 
             <main className="max-w-2xl mx-auto px-4 py-5 space-y-5">
                 {/* Red header */}
-                <div className="bg-[#D85A30] rounded-[14px] p-5 text-white text-center">
-                    <AlertCircle className="w-8 h-8 mx-auto mb-2" />
-                    <h1 className="text-xl font-bold">{isBn ? 'জরুরি সেবা' : 'Emergency Services'}</h1>
-                    <p className="text-sm text-white/80 mt-1">{isBn ? '২৪ ঘণ্টা, ৭ দিন সেবা প্রদান' : '24 hours, 7 days service'}</p>
+                <div className="bg-[#D85A30] rounded-[14px] p-5 text-white text-center relative overflow-hidden fade-rise">
+                    <div className="absolute -top-8 -right-8 w-32 h-32 bg-red-300/20 rounded-full blur-2xl" />
+                    <div className="relative">
+                        <AlertCircle className="w-8 h-8 mx-auto mb-2" style={{ animation: 'float-y 4s ease-in-out infinite' }} />
+                        <h1 className="text-xl font-bold">{isBn ? 'জরুরি সেবা' : 'Emergency Services'}</h1>
+                        <p className="text-sm text-white/80 mt-1">{isBn ? '২৪ ঘণ্টা, ৭ দিন সেবা প্রদান' : '24 hours, 7 days service'}</p>
+                    </div>
                 </div>
 
                 {/* SOS Button */}
@@ -186,8 +189,8 @@ function EmergencyContent() {
                 {/* Emergency services grid */}
                 <div className="grid grid-cols-2 gap-3">
                     {emergencyServices.map((s, i) => (
-                        <a key={i} href={`tel:${s.number}`} className={`card-sb p-4 ${s.color} border-2 flex flex-col gap-2 hover:shadow-md transition-shadow`}>
-                            <span className="text-3xl">{s.emoji}</span>
+                        <a key={i} href={`tel:${s.number}`} className={`card-sb card-3d p-4 ${s.color} border-2 flex flex-col gap-2 fade-rise`} style={{ animationDelay: `${i * 0.06}s` }}>
+                            <span className="text-3xl" style={{ animation: 'float-y 4s ease-in-out infinite', animationDelay: `${i * 0.3}s` }}>{s.emoji}</span>
                             <div>
                                 <p className="font-bold text-gray-900 text-sm">{isBn ? s.titleBn : s.titleEn}</p>
                                 <p className="text-xs text-gray-500">{isBn ? s.descBn : s.descEn}</p>
