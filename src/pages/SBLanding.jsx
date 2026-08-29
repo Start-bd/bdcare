@@ -45,7 +45,7 @@ function LandingContent() {
     const { isBn } = useLang();
 
     return (
-        <div className="min-h-screen bg-[#f8faf9] font-bengali">
+        <div className={`min-h-screen bg-[#f8faf9] ${isBn ? 'font-bengali' : 'font-english'}`}>
             <GlobalSEO
                 title="স্বাস্থ্য বন্ধু | Bangladesh's AI Health Companion | bdcare.app"
                 description={isBn
@@ -135,7 +135,7 @@ function LandingContent() {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         {steps.map((s, i) => (
                             <div key={i} className="text-center fade-rise" style={{ animationDelay: `${i * 0.1}s` }}>
-                                <div className="w-14 h-14 green-gradient rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-3 shadow-lg" style={{ animation: `float-y 4s ease-in-out infinite`, animationDelay: `${i * 0.4}s` }}>
+                                <div className="w-14 h-14 green-gradient rounded-full flex items-center justify-center text-white font-bold text-xl mx-auto mb-3 shadow-lg float-y-anim" style={{ animationDelay: `${i * 0.4}s` }}>
                                     {isBn ? s.num : s.numEn}
                                 </div>
                                 <h3 className="font-bold text-gray-900 mb-1">{isBn ? s.titleBn : s.titleEn}</h3>

@@ -88,7 +88,7 @@ function DashboardContent() {
                 {/* Services grid */}
                 <div>
                     <h2 className="font-bold text-gray-900 mb-3">{isBn ? 'সেবাসমূহ' : 'Services'}</h2>
-                    <div className="grid grid-cols-4 gap-3">
+                    <div className="grid grid-cols-3 gap-3">
                         {services.map((s, i) => (
                             <Link key={i} to={createPageUrl(s.page)} className="flex flex-col items-center gap-1.5 p-3 bg-white rounded-[14px] border border-[#e0e8e4] hover:border-[#0F6E56]/30 transition-colors fade-rise" style={{ animationDelay: `${i * 0.04}s` }}>
                                 <FloatingIcon Icon={s.icon} color={s.color} size="sm" delay={i * 150} />
