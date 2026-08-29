@@ -6,7 +6,7 @@ import TopNav from '../components/sb/TopNav';
 import BottomNav from '../components/sb/BottomNav';
 import AIOrb from '../components/sb/AIOrb';
 import { base44 } from '@/api/base44Client';
-import { Send, Bot, User, Loader2, Stethoscope } from 'lucide-react';
+import { Send, Bot, User, Loader2, Stethoscope, Sparkles } from 'lucide-react';
 
 const QUICK_SYMPTOMS = [
     { bn: 'জ্বর', en: 'Fever' },
@@ -90,61 +90,71 @@ Respond as the AI Doctor in a caring, helpful manner.`,
     };
 
     return (
-        <div className="min-h-screen bg-[#f8faf9] flex flex-col pb-16 md:pb-0">
+        <div className="min-h-screen bg-gradient-to-b from-[#f8faf9] via-[#f8faf9] to-[#eefaf5] flex flex-col pb-16 md:pb-0">
             <TopNav user={user} />
 
-            {/* Chat header */}
-            <div className="bg-white border-b border-[#e0e8e4] px-4 py-3 flex items-center gap-3">
+            {/* Chat header — premium gradient with glow */}
+            <div className="green-gradient text-white px-4 py-4 flex items-center gap-3 relative overflow-hidden shadow-lg shadow-emerald-900/10">
+                <div className="absolute -right-8 -top-8 w-28 h-28 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -left-10 -bottom-10 w-32 h-32 bg-teal-300/15 rounded-full blur-3xl pointer-events-none" />
                 <AIOrb size="md" asLink={false} isBn={isBn} label={isBn ? 'AI সহায়ক' : 'AI Assistant'} />
-                <div>
-                    <p className="font-bold text-gray-900 text-sm">{isBn ? 'AI স্বাস্থ্য সহায়ক' : 'AI Health Assistant'}</p>
-                    <p className="text-xs text-green-500 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                        {isBn ? 'সক্রিয়' : 'Active'}
+                <div className="relative">
+                    <p className="font-bold text-base leading-tight flex items-center gap-1.5">
+                        {isBn ? 'AI স্বাস্থ্য সহায়ক' : 'AI Health Assistant'}
                     </p>
+                    <p className="text-xs text-white/80 flex items-center gap-1.5 mt-0.5">
+                        <span className="w-1.5 h-1.5 bg-emerald-300 rounded-full animate-pulse" />
+                        {isBn ? 'সক্রিয় · সবসময় প্রস্তুত' : 'Active · Always ready'}
+                    </p>
+                </div>
+                <div className="ml-auto relative">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold bg-white/15 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                        <Sparkles className="w-3 h-3" />
+                        {isBn ? 'বিনামূল্যে' : 'Free'}
+                    </span>
                 </div>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 max-w-2xl mx-auto w-full">
+            <div className="flex-1 overflow-y-auto px-4 py-5 space-y-4 max-w-2xl mx-auto w-full">
                 {messages.map((msg, i) => (
-                    <div key={i} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div key={i} className={`flex gap-2.5 ${msg.role === 'user' ? 'justify-end' : 'justify-start'} fade-rise`}>
                         {msg.role === 'assistant' && (
-                            <div className="w-8 h-8 rounded-full green-gradient flex items-center justify-center flex-shrink-0 mt-1">
+                            <div className="w-9 h-9 rounded-full green-gradient flex items-center justify-center flex-shrink-0 mt-0.5 shadow-md shadow-emerald-900/15">
                                 <Bot className="w-4 h-4 text-white" />
                             </div>
                         )}
-                        <div className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
+                        <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap shadow-sm ${
                             msg.role === 'user'
-                                ? 'bg-[#0F6E56] text-white rounded-br-sm'
-                                : 'bg-white border border-[#e0e8e4] text-gray-700 rounded-bl-sm'
+                                ? 'green-gradient text-white rounded-br-md shadow-emerald-900/15'
+                                : 'bg-white border border-[#e0e8e4] text-gray-700 rounded-bl-md'
                         }`}>
                             {msg.content}
                             {msg.role === 'assistant' && i > 0 && (
                                 <div className="mt-3 pt-3 border-t border-[#e0e8e4]">
                                     <Link
                                         to={createPageUrl('SBDoctors')}
-                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-[#eefaf5] text-[#0F6E56] rounded-[8px] text-xs font-semibold hover:bg-[#0F6E56] hover:text-white transition-colors"
+                                        className="flex items-center justify-center gap-2 px-4 py-2 bg-[#eefaf5] text-[#0F6E56] rounded-[10px] text-xs font-semibold hover:bg-[#0F6E56] hover:text-white transition-colors"
                                     >
-                                        <Stethoscope className="w-3 h-3" />
+                                        <Stethoscope className="w-3.5 h-3.5" />
                                         {isBn ? 'ডাক্তারের সাথে কথা বলুন' : 'Talk to a Doctor'}
                                     </Link>
                                 </div>
                             )}
                         </div>
                         {msg.role === 'user' && (
-                            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 mt-1">
-                                <User className="w-4 h-4 text-gray-500" />
+                            <div className="w-9 h-9 rounded-full bg-white border border-[#e0e8e4] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                                <User className="w-4 h-4 text-[#0F6E56]" />
                             </div>
                         )}
                     </div>
                 ))}
                 {loading && (
-                    <div className="flex gap-2 justify-start">
-                        <div className="w-8 h-8 rounded-full green-gradient flex items-center justify-center flex-shrink-0">
+                    <div className="flex gap-2.5 justify-start fade-rise">
+                        <div className="w-9 h-9 rounded-full green-gradient flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-900/15">
                             <Bot className="w-4 h-4 text-white" />
                         </div>
-                        <div className="bg-white border border-[#e0e8e4] p-3 rounded-2xl rounded-bl-sm flex items-center gap-2">
+                        <div className="bg-white border border-[#e0e8e4] px-4 py-3 rounded-2xl rounded-bl-md flex items-center gap-2 shadow-sm">
                             <Loader2 className="w-4 h-4 text-[#0F6E56] animate-spin" />
                             <span className="text-xs text-gray-400">{isBn ? 'লিখছি...' : 'Typing...'}</span>
                         </div>
@@ -155,12 +165,12 @@ Respond as the AI Doctor in a caring, helpful manner.`,
 
             {/* Quick symptoms */}
             {messages.length <= 1 && (
-                <div className="px-4 pb-2 max-w-2xl mx-auto w-full">
-                    <p className="text-xs text-gray-400 mb-2">{isBn ? 'দ্রুত নির্বাচন:' : 'Quick select:'}</p>
-                    <div className="flex gap-2 overflow-x-auto pb-1">
+                <div className="px-4 pb-2 max-w-2xl mx-auto w-full fade-rise">
+                    <p className="text-xs text-gray-400 mb-2 font-medium">{isBn ? 'দ্রুত নির্বাচন:' : 'Quick select:'}</p>
+                    <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                         {QUICK_SYMPTOMS.map((s, i) => (
                             <button key={i} onClick={() => sendMessage(isBn ? s.bn : s.en)}
-                                className="flex-shrink-0 px-3 py-1.5 bg-white border border-[#e0e8e4] rounded-full text-xs font-medium text-gray-600 hover:border-[#0F6E56] hover:text-[#0F6E56] transition-colors"
+                                className="flex-shrink-0 px-3.5 py-1.5 bg-white border border-[#e0e8e4] rounded-full text-xs font-medium text-gray-600 hover:border-[#0F6E56] hover:text-[#0F6E56] hover:shadow-md hover:shadow-emerald-900/5 transition-all"
                             >
                                 {isBn ? s.bn : s.en}
                             </button>
@@ -170,20 +180,20 @@ Respond as the AI Doctor in a caring, helpful manner.`,
             )}
 
             {/* Input */}
-            <div className="bg-white border-t border-[#e0e8e4] px-4 py-3 max-w-2xl mx-auto w-full">
-                <div className="flex gap-2">
+            <div className="bg-white/90 backdrop-blur-sm border-t border-[#e0e8e4] px-4 py-3 max-w-2xl mx-auto w-full">
+                <div className="flex gap-2 items-center">
                     <input
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={e => e.key === 'Enter' && !e.shiftKey && sendMessage()}
                         placeholder={isBn ? 'আপনার স্বাস্থ্য সমস্যা বলুন...' : 'Describe your health problem...'}
-                        className="flex-1 px-4 py-2.5 bg-[#f8faf9] border border-[#e0e8e4] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#0F6E56]/30"
+                        className="flex-1 px-4 py-2.5 bg-[#f8faf9] border border-[#e0e8e4] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#0F6E56]/30 focus:border-[#0F6E56]/40 transition-all"
                         disabled={loading}
                     />
                     <button
                         onClick={() => sendMessage()}
                         disabled={loading || !input.trim()}
-                        className="w-10 h-10 rounded-full green-gradient flex items-center justify-center flex-shrink-0 disabled:opacity-50"
+                        className="w-11 h-11 rounded-full green-gradient flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-900/20 hover:shadow-lg hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100"
                     >
                         <Send className="w-4 h-4 text-white" />
                     </button>
